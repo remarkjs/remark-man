@@ -31,7 +31,7 @@ var map = {};
 
 dsv.tsv.parse(doc).forEach(function (row) {
     var characters = row.unicode.split('_').map(function (point) {
-        return String.fromCodePoint(parseInt(point, 16));
+        return String.fromCharCode(parseInt(point, 16));
     }).join('');
 
     if (characters === row.glyph) {
