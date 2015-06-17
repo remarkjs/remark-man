@@ -105,6 +105,11 @@ var months = [
  * Stringify an argument which can be passed to `new Date`
  * into a full month name and a year.
  *
+ * @example
+ *   toDate(new Date()) // 'June 2015'
+ *   toDate(Date.now()) // 'June 2015'
+ *   toDate('2015-4-4') // 'April 2015'
+ *
  * @param {Date|number|string} date
  * @return {string}
  */
@@ -116,6 +121,9 @@ function toDate(date) {
 
 /**
  * Escape a value for roff output.
+ *
+ * @example
+ *   escape('#') // '\\[sh]'
  *
  * @param {string} value
  * @return {string}
@@ -129,6 +137,10 @@ function escape(value) {
 /**
  * Compile a roff macro.
  *
+ * @example
+ *   macro('P') // '.P'
+ *   macro('P', '...') // '.P ...'
+ *
  * @param {string} name
  * @param {string?} [value]
  * @return {string}
@@ -141,6 +153,9 @@ function macro(name, value) {
  * Wrap `value` with double quotes, and escape internal
  * double quotes.
  *
+ * @example
+ *   quote('foo "bar" baz') // '"foo \\"bar\\" baz"'
+ *
  * @param {string} value
  * @return {string}
  */
@@ -151,6 +166,9 @@ function quote(value) {
 /**
  * Wrap a value in a text decoration.
  *
+ * @example
+ *   textDecoration('B', '...') // '\fB...\fR'
+ *
  * @param {string} name
  * @param {string?} [value]
  * @return {string}
@@ -160,7 +178,24 @@ function textDecoration(name, value) {
 }
 
 /**
+ * Gather link definitions.  Stores `link`s on the context
+ * object at `links`.
+ *
+ * @example
+ *   gatherDefinitions(root)
+ *
+ * @param {Node} node - Probably the root node.
+ */
+function gatherDefinitions(node) {
+    this.links[node.identifier] = node.link;
+}
+
+/**
  * Wrap a node in an inline roff command.
+ *
+ * @example
+ *   inline('B', '...') // '\fB...\fR'
+ *   inline('B', strongNode, compiler) // '\fB...\fR'
  *
  * @param {string} decoration
  * @param {Node|string} node
@@ -177,7 +212,10 @@ function inline(decoration, node, compiler) {
 /**
  * Compile a value as bold.
  *
- * @param {Node} node
+ * @example
+ *   bold(node) // '\fB...\fR'
+ *
+ * @param {Node} node - Strong node.
  * @return {string}
  */
 function bold(node) {
@@ -187,7 +225,10 @@ function bold(node) {
 /**
  * Compile a value as italic.
  *
- * @param {Node} node
+ * @example
+ *   italic(node) // '\fI...\fR'
+ *
+ * @param {Node} node - Emphasis node.
  * @return {string}
  */
 function italic(node) {
@@ -195,18 +236,12 @@ function italic(node) {
 }
 
 /**
- * Gather link definitions.
- *
- * @param {Node} node
- */
-function gatherDefinitions(node) {
-    this.links[node.identifier] = node.link;
-}
-
-/**
  * Compile inline code.
  *
- * @param {Node} node
+ * @example
+ *   inlineCode(node) // '\fI...\fR'
+ *
+ * @param {Node} node - Inline code node.
  * @return {string}
  */
 function inlineCode(node) {
@@ -215,6 +250,9 @@ function inlineCode(node) {
 
 /**
  * Compile a break.
+ *
+ * @example
+ *   hardBreak(node) // '\n.br\n'
  *
  * @return {string}
  */
@@ -225,6 +263,9 @@ function hardBreak() {
 /**
  * Compile a horizontal rule.
  *
+ * @example
+ *   rule(node) // '\n\\(em\\(em\\(em'
+ *
  * @return {string}
  */
 function rule() {
@@ -234,7 +275,10 @@ function rule() {
 /**
  * Compile a paragraph.
  *
- * @param {Node} node
+ * @example
+ *   heading(node) // '.P \nFoo bar...'
+ *
+ * @param {Node} node - Paragraph node.
  * @return {string}
  */
 function paragraph(node) {
@@ -244,7 +288,10 @@ function paragraph(node) {
 /**
  * Compile a heading.
  *
- * @param {Node} node
+ * @example
+ *   heading(node) // '.SH "DESC...'
+ *
+ * @param {Node} node - Heading node.
  * @return {string}
  */
 function heading(node) {
@@ -264,7 +311,11 @@ var MAILTO = 'mailto:';
 /**
  * Compile a link.
  *
- * @param {Node} node
+ * @example
+ *   link(node) // 'normal link \fIhttp://...'
+ *
+ * @param {Node} node - Link or image node.
+ * @param {string?} href - Overwrite URL.
  * @return {string}
  */
 function link(node, href) {
@@ -288,9 +339,12 @@ function link(node, href) {
 }
 
 /**
- * Output a reference.
+ * Compile a reference.
  *
- * @param {Node} node
+ * @example
+ *   reference(node) // 'normal link \fIhttp://...'
+ *
+ * @param {Node} node - Reference node.
  * @return {string}
  */
 function reference(node) {
@@ -300,7 +354,10 @@ function reference(node) {
 /**
  * Compile code.
  *
- * @param {Node} node
+ * @example
+ *   code(node) // '.RS 2\n .nf'
+ *
+ * @param {Node} node - Code node.
  * @return {string}
  */
 function code(node) {
@@ -315,7 +372,10 @@ function code(node) {
 /**
  * Compile a block quote.
  *
- * @param {Node} node
+ * @example
+ *   blockquote(node) // '.RS 0 ...'
+ *
+ * @param {Node} node - Block quote node.
  * @return {string}
  */
 function blockquote(node) {
@@ -336,7 +396,10 @@ function blockquote(node) {
 /**
  * Compile text.
  *
- * @param {Node} node
+ * @example
+ *   list(node) // 'foo \[em] bar'
+ *
+ * @param {Node} node - Text node.
  * @return {string}
  */
 function text(node) {
@@ -346,7 +409,10 @@ function text(node) {
 /**
  * Compile a list.
  *
- * @param {Node} node
+ * @example
+ *   list(node) // '.RS 4 ...'
+ *
+ * @param {Node} node - List node.
  * @return {string}
  */
 function list(node) {
@@ -378,7 +444,11 @@ var PARAGRAPH = macro('P') + ' \n';
 /**
  * Compile a list-item.
  *
- * @param {Node} node
+ * @example
+ *   listItem(node, '\\(bu') // '.IP \(bu 4 ...'
+ *
+ * @param {Node} node - List-item node.
+ * @param {string} bullet - Bullet to use.
  * @return {string}
  */
 function listItem(node, bullet) {
@@ -391,7 +461,10 @@ function listItem(node, bullet) {
  * Compile the children of `node` (such as root,
  * blockquote) as blocks.
  *
- * @param {Node} node
+ * @example
+ *   block(node) // '.P ...'
+ *
+ * @param {Node} node - Block node, such as a root.
  * @return {string}
  */
 function block(node) {
@@ -417,7 +490,10 @@ function block(node) {
  * Compile a `root` node.  This compiles a man header,
  * and the children of `root`.
  *
- * @param {Node} node
+ * @example
+ *   root(node) // '.TH "foo...'
+ *
+ * @param {Node} node - Root node.
  * @return {string}
  */
 function root(node) {
@@ -477,7 +553,11 @@ function root(node) {
 /**
  * Return an empty string and emit a warning.
  *
- * @return {string}
+ * @example
+ *   invalid(htmlNode) // Warns that HTML cannot be compiled.
+ *
+ * @param {Node} node - Node to warn about.
+ * @return {string} - Empty string.
  */
 function invalid(node) {
     this.file.warn('Cannot compile node of type `' + node.type + '`', node);
@@ -486,7 +566,7 @@ function invalid(node) {
 }
 
 /**
- * Return an empty string.
+ * Return an empty string for nodes which are ignored.
  *
  * @return {string}
  */
