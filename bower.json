@@ -1,0 +1,37 @@
+{
+  "name": "mdast-man",
+  "main": "mdast-man.js",
+  "description": "Compile Markdown to man pages (roff) with mdast",
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "man",
+    "manual",
+    "roff",
+    "ronn",
+    "mdast"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/mdast-man.git"
+  },
+  "author": {
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com"
+  },
+  "ignore": [
+    ".*",
+    "*.log",
+    "*.md",
+    "build/",
+    "components/",
+    "coverage/",
+    "node_modules/",
+    "test/",
+    "build.js",
+    "example.js",
+    "index.js",
+    "component.json",
+    "package.json"
+  ]
+}

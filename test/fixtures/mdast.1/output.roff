@@ -1,0 +1,60 @@
+.TH "MDAST" "1" "June 2015" "" ""
+.SH "NAME"
+\fBmdast\fR - Markdown processor
+.SH "SYNOPSIS"
+.P 
+\fBmdast\fR \[lB]\fBoptions\fR\[rB] \fIfile\[ba]dir\fR \fI...\fR
+.SH "DESCRIPTION"
+.P 
+\fBmdast\fR is speedy Markdown parser (and stringifier) for multipurpose analysis in JavaScript. Node.js and browser. Lots of tests. 100% coverage.
+.P 
+Logs verbose debugging information when \fB\[Do]DEBUG\fR is set to \fB\[dq]mdast\[dq]\fR.
+.P 
+Options are as follows:
+.RS 0
+.IP \(bu 4
+\fB-h\fR, \fB--help\fR: Output usage information;
+.IP \(bu 4
+\fB-V\fR, \fB--version\fR: Output version number;
+.IP \(bu 4
+\fB-o\fR, \fB--output\fR \fIpath\fR: Specify output. When \fIpath\fR is omitted, input files are overwritten;
+.IP \(bu 4
+\fB-c\fR, \fB--config-path\fR \fIpath\fR: specify configuration location;
+.IP \(bu 4
+\fB-i\fR, \fB--ignore-path\fR \fIpath\fR: specify ignore location;
+.IP \(bu 4
+\fB-s\fR, \fB--setting\fR \fIsettings\fR: specify settings;
+.IP \(bu 4
+\fB-u\fR, \fB--use\fR \fIplugin\fR: use a transform plugin, optionally with options;
+.IP \(bu 4
+\fB-e\fR, \fB--ext\fR \fIextensions\fR: specify file extensions to look for;
+.IP \(bu 4
+\fB-a\fR, \fB--ast\fR: output AST information;
+.IP \(bu 4
+\fB-q\fR, \fB--quiet\fR: output only warnings and errors;
+.IP \(bu 4
+\fB-S\fR, \fB--silent\fR: output only errors;
+.IP \(bu 4
+\fB--file-path <path>\fR: specify file path to process as
+.IP \(bu 4
+\fB--no-color\fR: disable color in output;
+.IP \(bu 4
+\fB--no-rc\fR: disable configuration from \fI.mdastrc\fR;
+.IP \(bu 4
+\fB--no-ignore\fR: disable ignoring from \fI.mdastignore\fR.
+.RE 0
+
+.P 
+A \fB--\fR argument tells the cli parser to stop reading flags.
+.SH "DIAGNOSTICS"
+.P 
+\fBmdast\fR exits 0 on success, and 1 otherwise.
+.SH "BUGS"
+.P 
+\fIhttps://github.com/wooorm/mdast/issues\fR
+.SH "SEE ALSO"
+.P 
+\fBmdastrc\fR(5), \fBmdastignore\fR(5), \fBmdastconfig\fR(7), \fBmdast\fR(3).
+.SH "AUTHOR"
+.P 
+Written by Titus Wormer \fItituswormer@gmail.com\fR

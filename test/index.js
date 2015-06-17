@@ -1,0 +1,143 @@
+'use strict';
+
+/* eslint-env mocha */
+
+/*
+ * Dependencies.
+ */
+
+var path = require('path');
+var fs = require('fs');
+var assert = require('assert');
+var diff = require('diff');
+var chalk = require('chalk');
+var mdast = require('mdast');
+var File = require('mdast/lib/file');
+var man = require('..');
+
+/*
+ * Methods.
+ */
+
+var read = fs.readFileSync;
+var exists = fs.existsSync;
+var join = path.join;
+var basename = path.basename;
+var extname = path.extname;
+var dirname = path.dirname;
+
+/*
+ * Constants.
+ */
+
+var stderr = global.process.stderr;
+
+/**
+ * Create a `File` from a `filePath`.
+ *
+ * @param {string} filePath
+ * @return {File}
+ */
+function toFile(filePath, contents) {
+    var extension = extname(filePath);
+    var directory = dirname(filePath);
+    var name = basename(filePath, extension);
+
+    return new File({
+        'directory': directory,
+        'filename': name,
+        'extension': extension.slice(1),
+        'contents': contents
+    });
+}
+
+/*
+ * Constants.
+ */
+
+var ROOT = join(__dirname, 'fixtures');
+
+/*
+ * Fixtures.
+ */
+
+var fixtures = fs.readdirSync(ROOT);
+
+/**
+ * Shortcut to process.
+ *
+ * @param {File} file
+ * @return {string}
+ */
+function process(file, config) {
+    return mdast.use(man, config).process(file, {
+        'footnotes': true
+    });
+}
+
+/*
+ * Tests.
+ */
+
+describe('mdast-man()', function () {
+    it('should be a function', function () {
+        assert(typeof man === 'function');
+    });
+
+    it('should not throw if not passed options', function () {
+        assert.doesNotThrow(function () {
+            man(mdast());
+        });
+    });
+});
+
+/**
+ * Describe a fixtures.
+ *
+ * @param {string} fixture
+ */
+function describeFixture(fixture) {
+    it('should work on `' + fixture + '`', function () {
+        var filepath = join(ROOT, fixture);
+        var output = read(join(filepath, 'output.roff'), 'utf-8');
+        var input = read(join(filepath, 'input.md'), 'utf-8');
+        var config = join(filepath, 'config.json');
+        var file = toFile(fixture + '.md', input);
+        var result;
+        var difference;
+
+        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
+        result = process(file, config);
+
+        try {
+            assert(result === output);
+        } catch (exception) {
+            difference = diff.diffLines(output, result);
+
+            difference.forEach(function (change) {
+                var colour = change.added ?
+                    'green' : change.removed ? 'red' : 'dim';
+
+                stderr.write(chalk[colour](change.value));
+            });
+
+            throw exception;
+        }
+    });
+}
+
+/*
+ * Gather fixtures.
+ */
+
+fixtures = fixtures.filter(function (filepath) {
+    return filepath.indexOf('.') !== 0;
+});
+
+/*
+ * Assert fixtures.
+ */
+
+describe('Fixtures', function () {
+    fixtures.forEach(describeFixture);
+});

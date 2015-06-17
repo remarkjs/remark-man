@@ -1,0 +1,19 @@
+{
+  "name": "mdast-man",
+  "version": "0.0.0",
+  "description": "Compile Markdown to man pages (roff) with mdast",
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "man",
+    "manual",
+    "roff",
+    "ronn",
+    "mdast"
+  ],
+  "repository": "wooorm/mdast-man",
+  "scripts": [
+    "index.js",
+    "lib/"
+  ]
+}

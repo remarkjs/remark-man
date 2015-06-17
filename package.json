@@ -1,0 +1,66 @@
+{
+  "name": "mdast-man",
+  "version": "0.0.0",
+  "description": "Compile Markdown to man pages (roff) with mdast",
+  "license": "MIT",
+  "keywords": [
+    "markdown",
+    "man",
+    "manual",
+    "roff",
+    "ronn",
+    "mdast"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/mdast-man.git"
+  },
+  "author": {
+    "name": "Titus Wormer",
+    "email": "tituswormer@gmail.com"
+  },
+  "dependencies": {},
+  "files": [
+    "index.js",
+    "lib/",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "mdast": ">=0.22.0"
+  },
+  "devDependencies": {
+    "browserify": "^10.0.0",
+    "chalk": "^1.0.0",
+    "d3-dsv": "^0.1.5",
+    "diff": "^1.4.0",
+    "escape-string-regexp": "^1.0.3",
+    "eslint": "^0.23.0",
+    "esmangle": "^1.0.0",
+    "istanbul": "^0.3.0",
+    "jscs": "^1.0.0",
+    "jscs-jsdoc": "^1.0.0",
+    "mdast": "^0.22.0",
+    "mdast-github": "^0.3.0",
+    "mdast-lint": "^0.2.0",
+    "mdast-toc": "^0.4.1",
+    "mdast-yaml-config": "^0.2.0",
+    "mocha": "^2.0.0"
+  },
+  "scripts": {
+    "test-api": "mocha --check-leaks test/index.js",
+    "test-coveralls": "istanbul cover _mocha --report lcovonly -- --check-leaks test/index.js",
+    "test-coverage": "istanbul cover _mocha -- --check-leaks test/index.js",
+    "test-travis": "npm run test-coveralls",
+    "test": "npm run test-api",
+    "lint-api": "eslint .",
+    "lint-style": "jscs --reporter inline .",
+    "lint": "npm run lint-api && npm run lint-style",
+    "make": "npm run lint && npm run test-coverage",
+    "build-uniglyph": "bash script/build-unigroff.sh",
+    "build-md": "mdast . --output --quiet",
+    "build-bundle": "browserify index.js --bare -s mdastMan > mdast-man.js",
+    "postbuild-bundle": "esmangle mdast-man.js > mdast-man.min.js",
+    "build": "npm run build-md && npm run build-uniglyph && npm run build-bundle",
+    "prepublish": "npm run build"
+  }
+}
