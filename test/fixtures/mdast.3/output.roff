@@ -23,12 +23,12 @@ var doc \[eq] processor.process(
 .fi
 .RE
 .SH "DESCRIPTION"
-.P 
+.P
 This is the application programming interface documentation for \fBmdast\fR. To find documentation for the command line interface, see \fBman 1 mdast\fR.
 .SS "mdast.use(plugin, options?)"
-.P 
+.P
 Change the way \fBmdast\fR functions by using a plugin. Plugins are documented at \fIhttps://github.com/wooorm/mdast/blob/master/doc/plugins.md\fR.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
@@ -37,7 +37,7 @@ Change the way \fBmdast\fR functions by using a plugin. Plugins are documented a
 \fBprocessor \[eq] mdast.use(plugins)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -48,21 +48,21 @@ Change the way \fBmdast\fR functions by using a plugin. Plugins are documented a
 \fBoptions\fR (\fBObject?\fR) -- Passed to plugin. Specified by its documentation.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBObject\fR -- An instance of \fBmdast\fR. The instance functions just like the \fBmdast\fR library itself (it has the same methods), but caches the \fBuse\fRd plugins.
 .SS "mdast.parse(file, options?)"
-.P 
+.P
 Parse a markdown document into an abstract syntax tree.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBast \[eq] mdast.parse(file\[ba]value, options?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -73,14 +73,14 @@ Parse a markdown document into an abstract syntax tree.
 \fBoptions\fR (\fBObject\fR) -- Settings. See \fBman 7 mdastconfig\fR.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBObject\fR -- Node. Nodes are documented at \fIhttps://github.com/wooorm/mdast/blob/master/doc/nodes.md\fR.
 .SS "mdast.run(ast, file, done?)"
-.P 
+.P
 Modify an abstract syntax tree by applying plugins to it.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
@@ -89,7 +89,7 @@ Modify an abstract syntax tree by applying plugins to it.
 \fBast \[eq] mdast.run(ast, done?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -102,21 +102,21 @@ Modify an abstract syntax tree by applying plugins to it.
 \fBdone\fR (\fBfunction done(err?, doc?, file?)\fR).
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBObject\fR -- Given AST.
 .SS "mdast.stringify(ast, options?)"
-.P 
+.P
 Compile an abstract syntax tree into a document.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBdoc \[eq] mdast.stringify(ast, options?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -125,21 +125,21 @@ Compile an abstract syntax tree into a document.
 \fBoptions\fR (\fBObject\fR) -- Settings. See \fBman 7 mdastconfig\fR.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBstring\fR -- Document. Formatted in markdown by default, or in whatever a plugin generates.
 .SS "mdast.process(file, options?, done?)"
-.P 
+.P
 Parse, modify, and compile a markdown document it into something else.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBdoc \[eq] mdast.process(file\[ba]value, options?, done?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -152,14 +152,14 @@ Parse, modify, and compile a markdown document it into something else.
 \fBdone\fR (\fBfunction done(err?, doc?, file?)\fR).
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBstring\fR -- Document. Formatted in markdown by default, or in whatever a plugin generates.
 .SS "function done(err?, doc?, file?)"
-.P 
+.P
 Invoked when processing is complete.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
@@ -168,7 +168,7 @@ Invoked when processing is complete.
 \fBfunction done(null, doc, file)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -179,21 +179,21 @@ Invoked when processing is complete.
 \fBfile\fR (\fBFile\fR) -- File object representing the input file;
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBstring\fR -- Document. Formatted in markdown by default, or in whatever a plugin generates.
 .SS "File()"
-.P 
+.P
 File objects make it easy to change the directory, name, or extension of a file: let\[aq]s say multiple markdown files are converted to HTML. Instead of overwriting the markdown sources, file objects make it easy to output files with a different (\fB\[dq]html\[dq]\fR) extension. In addition, files expose the raw source to plugins.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBfile \[eq] File(file\[ba]value\[ba]options?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -215,13 +215,13 @@ File objects make it easy to change the directory, name, or extension of a file:
 
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBFile\fR -- Instance.
-.P 
+.P
 \fBNotes\fR
-.P 
+.P
 \fBFile\fR exposes an interface compatible with ESLint\[aq]s formatters. For example, to expose warnings using ESLint\[aq]s \fBcompact\fR formatter, execute the following:
 .P
 .RS 2
@@ -240,7 +240,7 @@ file.warn(\[aq]Woops, something happened!\[aq]);
 console.log(compact(\[lB]file\[rB]));
 .fi
 .RE
-.P 
+.P
 Which would yield the following:
 .P
 .RS 2
@@ -251,30 +251,30 @@ Which would yield the following:
 .fi
 .RE
 .SS "File\[sh]toString()"
-.P 
+.P
 Getter for internal \fBcontents\fR property.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBvalue \[eq] file.toString()\fR.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBstring\fR -- Contents.
 .SS "File\[sh]messages"
-.P 
+.P
 A list of warnings and errors associated with the file.
-.P 
+.P
 \fBSignature\fR
 .RS 0
 .IP \(bu 4
 \fBArray.<Message>\fR.
 .RE 0
 
-.P 
+.P
 Where \fBMessage\fR has the following properties:
 .RS 0
 .IP \(bu 4
@@ -287,35 +287,35 @@ Where \fBMessage\fR has the following properties:
 \fBcolumn\fR (\fBnumber\fR) -- Starting column of exception.
 .RE 0
 
-.P 
+.P
 \fBNotes\fR
-.P 
+.P
 \fBFile\[sh]exception()\fR, and in turn \fBFile\[sh]warn()\fR and \fBFile\[sh]fail()\fR, return \fBError\fR objects that comply with this schema. Its results can be added to \fBmessages\fR.
 .SS "File\[sh]hasFailed()"
-.P 
+.P
 Check if a fatal exception occurred making the file no longer processable.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBhasFailed \[eq] file.hasFailed()\fR.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBboolean\fR -- \fBtrue\fR if at least one of \fBfile\fRs \fBmessage\fRs has a \fBfatal\fR property set to \fBtrue\fR.
 .SS "File\[sh]exception(reason, position?)"
-.P 
+.P
 Create an error.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBerr \[eq] file.exception(err\[ba]reason, node\[ba]location\[ba]position?)\fR.
 .RE 0
 
-.P 
+.P
 \fBParameters\fR
 .RS 0
 .IP \(bu 4
@@ -330,11 +330,11 @@ Create an error.
 \fBposition\fR (\fBObject\fR) -- Syntax tree position (found at \fBnode.position.start\fR).
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBError\fR -- Pretty error with location information.
-.P 
+.P
 This object has the following properties:
 .RS 0
 .IP \(bu 4
@@ -348,9 +348,9 @@ This object has the following properties:
 .RE 0
 
 .SS "File\[sh]warn(reason, position?)"
-.P 
+.P
 Creates an exception by passing its arguments to \fBFile\[sh]exception()\fR, sets \fBfatal: false\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
-.P 
+.P
 \fBSee\fR
 .RS 0
 .IP \(bu 4
@@ -358,11 +358,11 @@ Creates an exception by passing its arguments to \fBFile\[sh]exception()\fR, set
 .RE 0
 
 .SS "File\[sh]fail(reason, position?)"
-.P 
+.P
 Creates an exception by passing its arguments to \fBFile\[sh]exception()\fR, sets \fBfatal: true\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
-.P 
+.P
 If \fBfile\fR has a falsey \fBquiet\fR property, \fBFile\[sh]fail()\fR throws the exception.
-.P 
+.P
 \fBSee\fR
 .RS 0
 .IP \(bu 4
@@ -370,25 +370,25 @@ If \fBfile\fR has a falsey \fBquiet\fR property, \fBFile\[sh]fail()\fR throws th
 .RE 0
 
 .SS "File\[sh]filePath()"
-.P 
+.P
 Get the filename, with extension and directory, if applicable.
-.P 
+.P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
 \fBfilename? \[eq] file.filePath()\fR.
 .RE 0
 
-.P 
+.P
 \fBReturns\fR
-.P 
+.P
 \fBstring\fR -- If the \fBfile\fR has a \fBfilename\fR, it will be prefixed with the directory (slashed), if applicable, and su\[Fi]xed with the (dotted) extension (if applicable). Otherwise, an empty string is returned.
 .SH "BUGS"
-.P 
+.P
 \fIhttps://github.com/wooorm/mdast/issues\fR
 .SH "SEE ALSO"
-.P 
+.P
 \fBmdast\fR(1), \fBmdastconfig\fR(7).
 .SH "AUTHOR"
-.P 
+.P
 Written by Titus Wormer \fItituswormer@gmail.com\fR

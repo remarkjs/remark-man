@@ -2,17 +2,17 @@
 .SH "NAME"
 \fBmdastrc\fR - mdast config files
 .SH "SYNOPSIS"
-.P 
+.P
 \fB.mdastrc\fR, \fBpackage.json\fR
 .SH "DESCRIPTION"
-.P 
+.P
 \fBmdast\fR gets its configuration from the command line and \fBmdastrc\fR files.
-.P 
+.P
 For a list of available configuration options, see \fBmdast\fR(1) or \fIhttps://github.com/wooorm/mdast/blob/master/doc/options.md\fR.
 .SH "FILES"
-.P 
+.P
 All \fBmdastrc\fR(5) configuration files are in JSON.
-.P 
+.P
 Automatically detected files named \fBpackage.json\fR use the \fBmdastConfig\fR field, whereas other files are used as a whole.
 .SH "FIELDS"
 .SS "settings"
@@ -27,10 +27,10 @@ Automatically detected files named \fBpackage.json\fR use the \fBmdastConfig\fR 
 \[rC]
 .fi
 .RE
-.P 
+.P
 Settings contains an object mapping a setting to a value. See \fBman 7 mdastconfig\fR for available settings.
 .SS "plugins"
-.P 
+.P
 List:
 .P
 .RS 2
@@ -42,7 +42,7 @@ List:
 \[rC]
 .fi
 .RE
-.P 
+.P
 Options:
 .P
 .RS 2
@@ -56,12 +56,12 @@ Options:
 \[rC]
 .fi
 .RE
-.P 
+.P
 The \fBplugins\fR field contains either an array of plugins, or an object mapping plugins to their options.
-.P 
+.P
 When a plugin is prefixed with \fBmdast-\fR (which is recommended), the prefix can be omitted in the plugin list or map.
 .SH "CASCADE"
-.P 
+.P
 Precedence is as follows:
 .RS 0
 .IP \(bu 4
@@ -74,9 +74,9 @@ Files named \fB.mdastrc\fR and \fBmdastConfig\fR fields in \fBpackage.json\fR in
 If no \fB.mdastrc\fR and \fBpackage.json\fR were detected in the directory of the file or its ancestral directories, a per-user config file (\fB\[ti]\[sl].mdastrc\fR) is used;
 .RE 0
 
-.P 
+.P
 If both \fB.mdastrc\fR and \fBpackage.json\fR exist in a directory, the file named \fB.mdastrc\fR takes precedence in the cascade over \fBpackage.json\fR.
-.P 
+.P
 For example, for the following project:
 .P
 .RS 2
@@ -91,7 +91,7 @@ project
 \[ba]-- readme.md
 .fi
 .RE
-.P 
+.P
 Where \fBdocs\[sl].mdastrc\fR looks as follows:
 .P
 .RS 2
@@ -103,7 +103,7 @@ Where \fBdocs\[sl].mdastrc\fR looks as follows:
 \[rC]
 .fi
 .RE
-.P 
+.P
 And \fBpackage.json\fR contains:
 .P
 .RS 2
@@ -117,7 +117,7 @@ And \fBpackage.json\fR contains:
 \[rC]
 .fi
 .RE
-.P 
+.P
 And \fB.mdastrc\fR contains:
 .P
 .RS 2
@@ -129,16 +129,16 @@ And \fB.mdastrc\fR contains:
 \[rC]
 .fi
 .RE
-.P 
+.P
 Then, when stringifying \fBdocs\[sl]doc.md\fR, \fBmdast\fR(1) would use \fBbullet: \[dq]\[pl]\[dq]\fR because \fBdocs\[sl].mdastrc\fR takes precedence over \fB.mdastrc\fR and \fBpackage.json\fR.
-.P 
+.P
 When stringifying \fBreadme.md\fR, \fBmdast\fR(1) would use \fBbullet: \[dq]-\[dq]\fR, because \fB.mdastrc\fR takes precedence over \fBpackage.json\fR.
 .SH "BUGS"
-.P 
+.P
 \fIhttps://github.com/wooorm/mdast/issues\fR
 .SH "SEE ALSO"
-.P 
+.P
 \fBmdast\fR(1), \fBmdastignore\fR(5), \fBmdastconfig\fR(7).
 .SH "AUTHOR"
-.P 
+.P
 Written by Titus Wormer \fItituswormer@gmail.com\fR
