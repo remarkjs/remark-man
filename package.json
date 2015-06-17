@@ -60,7 +60,6 @@
     "build-md": "mdast . --output --quiet",
     "build-bundle": "browserify index.js --bare -s mdastMan > mdast-man.js",
     "postbuild-bundle": "esmangle mdast-man.js > mdast-man.min.js",
-    "build": "npm run build-md && npm run build-uniglyph && npm run build-bundle",
-    "prepublish": "npm run build"
+    "build": "npm run build-md && npm run build-uniglyph && npm run build-bundle"
   }
 }
