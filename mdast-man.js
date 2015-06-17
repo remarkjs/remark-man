@@ -505,6 +505,7 @@ function root(node) {
     var section = config.section || defaults.section || '';
     var description = config.description || defaults.section || '';
     var value;
+    var extension;
 
     self.links = {};
 
@@ -521,7 +522,14 @@ function root(node) {
      */
 
     if (section !== '') {
-        file.extension = String(section);
+        extension = String(section);
+        file.extension = extension;
+
+        extension = '.' + extension;
+
+        if (file.filename.slice(-extension.length) === extension) {
+            file.filename = file.filename.slice(0, -extension.length);
+        }
     }
 
     value = self.block(node);
