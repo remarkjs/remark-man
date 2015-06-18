@@ -139,14 +139,15 @@ function escape(value) {
  *
  * @example
  *   macro('P') // '.P'
- *   macro('P', '...') // '.P ...'
+ *   macro('P', '...') // '.P\n...'
  *
  * @param {string} name
  * @param {string?} [value]
  * @return {string}
  */
 function macro(name, value) {
-    return '.' + name + (value ? ' ' + value : '');
+    return '.' + name + (value ?
+        (value.charAt(0) === '\n' ? value : ' ' + value) : '');
 }
 
 /**
@@ -439,7 +440,7 @@ function list(node) {
         '.RE 0\n';
 }
 
-var PARAGRAPH = macro('P') + ' \n';
+var PARAGRAPH = macro('P', '\n');
 
 /**
  * Compile a list-item.
@@ -538,7 +539,7 @@ function root(node) {
      * Ensure a final eof eol is added.
      */
 
-    if (value.charAt(value.length - 1) !== '\n') {
+    if (value && value.charAt(value.length - 1) !== '\n') {
         value += '\n';
     }
 
