@@ -5,6 +5,11 @@ mdast:
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.2.1 / 2015-07-04
+==================
+
+*   Fix support for missing filenames (stdin) (5fdcde2)
+
 0.2.0 / 2015-06-17
 ==================
 
