@@ -81,6 +81,21 @@ describe('mdast-man()', function () {
             man(mdast());
         });
     });
+
+    it('should work without filename', function () {
+        var fixture = 'nothing';
+        var filepath = join(ROOT, fixture);
+        var output = read(join(filepath, 'output.roff'), 'utf-8');
+        var input = read(join(filepath, 'input.md'), 'utf-8');
+        var config = join(filepath, 'config.json');
+        var file = toFile(fixture + '.md', input);
+
+        file.filename = undefined;
+
+        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
+
+        assert.equal(process(file, config), output);
+    });
 });
 
 /**
@@ -95,12 +110,10 @@ function describeFixture(fixture) {
         var input = read(join(filepath, 'input.md'), 'utf-8');
         var config = join(filepath, 'config.json');
         var file = toFile(fixture + '.md', input);
-        var result;
 
         config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
-        result = process(file, config);
 
-        assert.equal(result, output);
+        assert.equal(process(file, config), output);
     });
 }
 

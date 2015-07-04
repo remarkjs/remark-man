@@ -528,7 +528,10 @@ function root(node) {
 
         extension = '.' + extension;
 
-        if (file.filename.slice(-extension.length) === extension) {
+        if (
+            file.filename &&
+            file.filename.slice(-extension.length) === extension
+        ) {
             file.filename = file.filename.slice(0, -extension.length);
         }
     }
@@ -721,7 +724,7 @@ function transformer(node, file) {
         } else {
             man.description = value;
         }
-    } else {
+    } else if (file.filename) {
         value = file.filename.split('.');
         match = value[value.length - 1];
 
