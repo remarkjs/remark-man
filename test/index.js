@@ -9,8 +9,6 @@
 var path = require('path');
 var fs = require('fs');
 var assert = require('assert');
-var diff = require('diff');
-var chalk = require('chalk');
 var mdast = require('mdast');
 var File = require('mdast/lib/file');
 var man = require('..');
@@ -25,12 +23,6 @@ var join = path.join;
 var basename = path.basename;
 var extname = path.extname;
 var dirname = path.dirname;
-
-/*
- * Constants.
- */
-
-var stderr = global.process.stderr;
 
 /**
  * Create a `File` from a `filePath`.
@@ -104,25 +96,11 @@ function describeFixture(fixture) {
         var config = join(filepath, 'config.json');
         var file = toFile(fixture + '.md', input);
         var result;
-        var difference;
 
         config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
         result = process(file, config);
 
-        try {
-            assert(result === output);
-        } catch (exception) {
-            difference = diff.diffLines(output, result);
-
-            difference.forEach(function (change) {
-                var colour = change.added ?
-                    'green' : change.removed ? 'red' : 'dim';
-
-                stderr.write(chalk[colour](change.value));
-            });
-
-            throw exception;
-        }
+        assert.equal(result, output);
     });
 }
 
