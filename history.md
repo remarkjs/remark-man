@@ -5,6 +5,13 @@ mdast:
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.3.0 / 2015-07-05
+==================
+
+*   Add anchor link support ([43ee2e7](https://github.com/wooorm/mdast-man/commit/43ee2e7))
+*   Add support for multiple level 1 headings ([85db199](https://github.com/wooorm/mdast-man/commit/85db199))
+*   Refactor to externalise utilities ([69585f0](https://github.com/wooorm/mdast-man/commit/69585f0))
+
 0.2.1 / 2015-07-04
 ==================
 
