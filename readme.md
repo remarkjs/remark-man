@@ -91,7 +91,7 @@ All options, including the `option` object itself, are optional:
 *   `version` (`string`);
 *   `manual` (`string`);
 
-These to `mdast.use()` as a second argument, or on the CLI:
+Pass these to `mdast.use()` as a second argument, or on the CLI:
 
 ```bash
 mdast --use 'man=name:"foo",section:2,description:"bar"' example.md
