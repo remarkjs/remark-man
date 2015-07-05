@@ -11,6 +11,10 @@
     "ronn",
     "mdast"
   ],
+  "dependencies": {
+    "wooorm/mdast-util-to-string": "^0.1.0",
+    "wooorm/mdast-util-visit": "^0.1.1"
+  },
   "repository": "wooorm/mdast-man",
   "scripts": [
     "index.js",

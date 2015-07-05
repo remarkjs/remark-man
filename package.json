@@ -11,6 +11,10 @@
     "ronn",
     "mdast"
   ],
+  "dependencies": {
+    "mdast-util-to-string": "^0.1.0",
+    "mdast-util-visit": "^0.1.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/wooorm/mdast-man.git"
@@ -19,7 +23,6 @@
     "name": "Titus Wormer",
     "email": "tituswormer@gmail.com"
   },
-  "dependencies": {},
   "files": [
     "index.js",
     "lib/",

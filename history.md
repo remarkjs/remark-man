@@ -8,7 +8,7 @@ mdast:
 0.2.1 / 2015-07-04
 ==================
 
-*   Fix support for missing filenames (stdin) (5fdcde2)
+*   Fix support for missing filenames (stdin) ([5fdcde2](https://github.com/wooorm/mdast-man/commit/5fdcde2))
 
 0.2.0 / 2015-06-17
 ==================
