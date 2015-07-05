@@ -264,7 +264,7 @@ function rule() {
  * Compile a paragraph.
  *
  * @example
- *   heading(node) // '.P \nFoo bar...'
+ *   paragraph(node) // '.P \nFoo bar...'
  *
  * @param {Node} node - Paragraph node.
  * @return {string}
@@ -284,10 +284,6 @@ function paragraph(node) {
  */
 function heading(node) {
     var name;
-
-    if (node.depth === 1) {
-        return '';
-    }
 
     name = node.depth === 2 ? 'SH' : 'SS';
 
@@ -621,6 +617,7 @@ module.exports = /ffi|ffl|Ü|ö|Ÿ|∉|Ž|≠|ý|À|ü|Â|û|Ä|ú|
 },{}],4:[function(require,module,exports){
 'use strict';
 
+var visit = require('mdast-util-visit');
 var toString = require('mdast-util-to-string');
 
 var MAN_EXPRESSION =
@@ -630,16 +627,13 @@ var MAN_EXPRESSION =
  * Transform a file.  This just parses the heading and
  * adds it’s name, section, and description to the file.
  *
- * @param {Object} node
- * @param {File} file
+ * @param {Object} ast - Root node.
+ * @param {File} file - Virtual file.
  */
-function transformer(node, file) {
+function transformer(ast, file) {
     var man = {};
-    var children = node && node.children;
-    var length = children && children.length;
-    var index = -1;
-    var first;
-    var child;
+    var titleCount = 0;
+    var title;
     var value;
     var match;
 
@@ -649,17 +643,25 @@ function transformer(node, file) {
 
     file.manConfiguration = man;
 
-    while (++index < length) {
-        child = children[index];
+    visit(ast, 'heading', function (node, index, parent) {
+        if (node.depth === 1) {
+            if (!titleCount) {
+                parent.children.splice(index, 1);
+                title = node;
+            }
 
-        if (child.type === 'heading' && child.depth === 1) {
-            first = child;
-            break;
+            titleCount++;
         }
+    });
+
+    if (titleCount > 1) {
+        visit(ast, 'heading', function (node) {
+            node.depth++;
+        });
     }
 
-    if (first) {
-        value = toString(first);
+    if (title) {
+        value = toString(title);
         match = MAN_EXPRESSION.exec(value);
 
         if (match) {
@@ -686,7 +688,7 @@ function transformer(node, file) {
 
 module.exports = transformer;
 
-},{"mdast-util-to-string":6}],5:[function(require,module,exports){
+},{"mdast-util-to-string":6,"mdast-util-visit":7}],5:[function(require,module,exports){
 module.exports={
   "\"": "dq",
   "#": "sh",
