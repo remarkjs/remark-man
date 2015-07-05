@@ -4,6 +4,7 @@
  * Dependencies.
  */
 
+var slug = require('mdast-slug');
 var transformer = require('./lib/transformer.js');
 var compilers = require('./lib/compilers.js');
 
@@ -16,10 +17,13 @@ var compilers = require('./lib/compilers.js');
  * @return {Function} - See `transformer`.
  */
 function attacher(mdast, options) {
+    var settings = options || {};
     var MarkdownCompiler = mdast.Compiler;
     var ancestor = MarkdownCompiler.prototype;
     var proto;
     var key;
+
+    mdast.use(slug, settings.slug);
 
     /**
      * Extensible prototype.
@@ -43,7 +47,7 @@ function attacher(mdast, options) {
      * Expose given settings.
      */
 
-    proto.defaultManConfiguration = options || {};
+    proto.defaultManConfiguration = settings;
 
     /*
      * Expose compiler.

@@ -85,11 +85,20 @@ To properly view that man page, use something like this: `man ./example.1`.
 All options, including the `option` object itself, are optional:
 
 *   `name` (`string`);
+
 *   `section` (`number` or `string`);
+
 *   `description` (`string`);
+
 *   `date` (given to `new Date()`);
+
 *   `version` (`string`);
+
 *   `manual` (`string`);
+
+*   `slug` ([`*`](https://github.com/wooorm/mdast-slug#mdastuseslug-options))
+    — Passed to [mdast-slug](https://github.com/wooorm/mdast-slug), used for
+    anchor-link detection.
 
 Pass these to `mdast.use()` as a second argument, or on the CLI:
 

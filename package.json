@@ -13,7 +13,8 @@
   ],
   "dependencies": {
     "mdast-util-to-string": "^0.1.0",
-    "mdast-util-visit": "^0.1.1"
+    "mdast-util-visit": "^0.1.1",
+    "mdast-slug": "^0.1.0"
   },
   "repository": {
     "type": "git",
