@@ -499,7 +499,8 @@ function root(node) {
     var defaults = self.defaultManConfiguration;
     var name = config.name || defaults.name || '';
     var section = config.section || defaults.section || '';
-    var description = config.description || defaults.section || '';
+    var description = config.description || defaults.description ||
+        config.title || '';
     var links = {};
     var headings = {};
     var value;
@@ -687,7 +688,7 @@ function transformer(ast, file) {
             man.section = match[2];
             man.description = match[3];
         } else {
-            man.description = value;
+            man.title = value;
         }
     } else if (file.filename) {
         value = file.filename.split('.');
