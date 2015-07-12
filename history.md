@@ -5,6 +5,11 @@ mdast:
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.4.0 / 2015-07-12
+==================
+
+*   Prefer default description to the title header ([000f0cc](https://github.com/wooorm/mdast-man/commit/000f0cc))
+
 0.3.0 / 2015-07-05
 ==================
 
