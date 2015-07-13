@@ -1,6 +1,6 @@
 {
   "name": "mdast-man",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Compile Markdown to man pages (roff) with mdast",
   "license": "MIT",
   "keywords": [
