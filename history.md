@@ -5,6 +5,11 @@ mdast:
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.4.2 / 2015-07-14
+==================
+
+*   Convert top-level section names to all-caps ([f03e564](https://github.com/wooorm/mdast-man/commit/f03e564))
+
 0.4.1 / 2015-07-13
 ==================
 
