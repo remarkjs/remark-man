@@ -5,6 +5,13 @@ mdast:
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.4.3 / 2015-07-22
+==================
+
+*   Fix support for nested font-styles ([2ed9e3a](https://github.com/wooorm/mdast-man/commit/2ed9e3a))
+*   Rebuild distribution ([5ea9c8a](https://github.com/wooorm/mdast-man/commit/5ea9c8a))
+*   Fix iterating over top-level headings ([f243574](https://github.com/wooorm/mdast-man/commit/f243574))
+
 0.4.2 / 2015-07-14
 ==================
 
