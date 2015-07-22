@@ -173,14 +173,15 @@ function quote(value) {
  * Wrap a value in a text decoration.
  *
  * @example
- *   textDecoration('B', '...') // '\fB...\fR'
+ *   textDecoration('B', '...', 'R') // '\fB...\fR'
  *
- * @param {string} name
+ * @param {string} enter - Opening font-setting.
  * @param {string?} [value]
+ * @param {string} exit - Closing font-setting.
  * @return {string}
  */
-function textDecoration(name, value) {
-    return '\\f' + name + (value ? value : '') + '\\fR';
+function textDecoration(enter, value, exit) {
+    return '\\f' + enter + (value ? value : '') + '\\f' + exit;
 }
 
 /**
@@ -196,10 +197,18 @@ function textDecoration(name, value) {
  * @return {string}
  */
 function inline(decoration, node, compiler) {
-    var value = typeof node === 'string' ?
-        node : compiler.all(node).join('');
+    var exit = compiler.exitMarker || 'R';
+    var value = node;
 
-    return textDecoration(decoration, value);
+    compiler.exitMarker = decoration;
+
+    if (node && node.type) {
+        value = compiler.all(node).join('');
+    }
+
+    compiler.exitMarker = exit;
+
+    return textDecoration(decoration, value, exit);
 }
 
 /**
@@ -208,6 +217,7 @@ function inline(decoration, node, compiler) {
  * @example
  *   bold(node) // '\fB...\fR'
  *
+ * @this {ManCompiler}
  * @param {Node} node - Strong node.
  * @return {string}
  */
@@ -221,6 +231,7 @@ function bold(node) {
  * @example
  *   italic(node) // '\fI...\fR'
  *
+ * @this {ManCompiler}
  * @param {Node} node - Emphasis node.
  * @return {string}
  */
@@ -234,6 +245,7 @@ function italic(node) {
  * @example
  *   inlineCode(node) // '\fI...\fR'
  *
+ * @this {ManCompiler}
  * @param {Node} node - Inline code node.
  * @return {string}
  */
@@ -337,7 +349,7 @@ function link(node, href) {
         value += ' ';
     }
 
-    return value + (url ? italic(url) : '');
+    return value + (url ? self.emphasis(url) : '');
 }
 
 /**
@@ -568,7 +580,7 @@ function root(node) {
         ' ' +
         quote(defaults.manual || '')
     ) + '\n' +
-    (name ? macro('SH', quote('NAME')) + '\n' + bold(name) : '') +
+    (name ? macro('SH', quote('NAME')) + '\n' + self.strong(name) : '') +
     escape(name && description ? ' - ' + description : description) + '\n' +
     value;
 }
