@@ -27,7 +27,7 @@ var dirname = path.dirname;
 /**
  * Create a `File` from a `filePath`.
  *
- * @param {string} filePath
+ * @param {string} filePath - File-path to virtualize.
  * @return {File}
  */
 function toFile(filePath, contents) {
@@ -58,7 +58,8 @@ var fixtures = fs.readdirSync(ROOT);
 /**
  * Shortcut to process.
  *
- * @param {File} file
+ * @param {File} file - Virtual file.
+ * @param {Object} config - Configuration.
  * @return {string}
  */
 function process(file, config) {
@@ -101,7 +102,7 @@ describe('mdast-man()', function () {
 /**
  * Describe a fixtures.
  *
- * @param {string} fixture
+ * @param {string} fixture - Path to fixture to describe.
  */
 function describeFixture(fixture) {
     it('should work on `' + fixture + '`', function () {

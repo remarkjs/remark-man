@@ -12,8 +12,8 @@ var compilers = require('./lib/compilers.js');
  * Attach a roff compiler, and a man-header detection
  * method as a transformer.
  *
- * @param {MDAST} mdast
- * @param {Object?} [options]
+ * @param {MDAST} mdast - Processor.
+ * @param {Object?} [options] - Configuration.
  * @return {Function} - See `transformer`.
  */
 function attacher(mdast, options) {

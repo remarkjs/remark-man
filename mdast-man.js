@@ -13,8 +13,8 @@ var compilers = require('./lib/compilers.js');
  * Attach a roff compiler, and a man-header detection
  * method as a transformer.
  *
- * @param {MDAST} mdast
- * @param {Object?} [options]
+ * @param {MDAST} mdast - Processor.
+ * @param {Object?} [options] - Configuration.
  * @return {Function} - See `transformer`.
  */
 function attacher(mdast, options) {
@@ -115,7 +115,7 @@ var months = [
  *   toDate(Date.now()) // 'June 2015'
  *   toDate('2015-4-4') // 'April 2015'
  *
- * @param {Date|number|string} date
+ * @param {Date|number|string} date - Date to transform.
  * @return {string}
  */
 function toDate(date) {
@@ -130,7 +130,7 @@ function toDate(date) {
  * @example
  *   escape('#') // '\\[sh]'
  *
- * @param {string} value
+ * @param {string} value - Value to escape.
  * @return {string}
  */
 function escape(value) {
@@ -146,8 +146,8 @@ function escape(value) {
  *   macro('P') // '.P'
  *   macro('P', '...') // '.P\n...'
  *
- * @param {string} name
- * @param {string?} [value]
+ * @param {string} name - Name of macro.
+ * @param {string?} [value] - Content of macro.
  * @return {string}
  */
 function macro(name, value) {
@@ -162,7 +162,7 @@ function macro(name, value) {
  * @example
  *   quote('foo "bar" baz') // '"foo \\"bar\\" baz"'
  *
- * @param {string} value
+ * @param {string} value - Content.
  * @return {string}
  */
 function quote(value) {
@@ -176,7 +176,7 @@ function quote(value) {
  *   textDecoration('B', '...', 'R') // '\fB...\fR'
  *
  * @param {string} enter - Opening font-setting.
- * @param {string?} [value]
+ * @param {string?} [value] - Content.
  * @param {string} exit - Closing font-setting.
  * @return {string}
  */
@@ -191,9 +191,9 @@ function textDecoration(enter, value, exit) {
  *   inline('B', '...') // '\fB...\fR'
  *   inline('B', strongNode, compiler) // '\fB...\fR'
  *
- * @param {string} decoration
- * @param {Node|string} node
- * @param {ManCompiler} compiler
+ * @param {string} decoration - Command.
+ * @param {Node|string} node - mdast node.
+ * @param {ManCompiler} compiler - Context.
  * @return {string}
  */
 function inline(decoration, node, compiler) {
