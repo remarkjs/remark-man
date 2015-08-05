@@ -474,6 +474,59 @@ function listItem(node, bullet) {
 }
 
 /**
+ * Compile a table.
+ *
+ * @example
+ *   table(node) // '.TS\ntab(@) allbox\n ...'
+ *
+ * @param {Node} node - Table node.
+ * @return {string}
+ */
+function table(node) {
+    var self = this;
+    var rows = node.children;
+    var index = rows.length;
+    var align = node.align;
+    var alignLength = align.length;
+    var pos;
+    var result = [];
+    var row;
+    var out;
+    var alignHeading = [];
+    var alignRow = [];
+
+    while (index--) {
+        pos = -1;
+        row = rows[index].children;
+        out = [];
+
+        while (++pos < alignLength) {
+            out[pos] = self.all(row[pos]).join('');
+        }
+
+        result[index] = out.join('@');
+    }
+
+    pos = -1;
+
+    while (++pos < alignLength) {
+        alignHeading.push('cb');
+        alignRow.push((align[pos] || 'l').charAt(0));
+    }
+
+    result = [].concat([
+        '',
+        'tab(@) allbox;',
+        alignHeading.join(' '),
+        alignRow.join(' ') + ' .'
+    ], result, [
+        '.TE'
+    ]).join('\n');
+
+    return macro('TS', result);
+}
+
+/**
  * Compile the children of `node` (such as root,
  * blockquote) as blocks.
  *
@@ -632,14 +685,13 @@ visitors.escape = text;
 visitors.linkReference = reference;
 visitors.imageReference = reference;
 visitors.definition = ignore;
+visitors.table = table;
 
 visitors.yaml = invalid;
 visitors.html = invalid;
 visitors.footnoteReference = invalid;
 visitors.footnote = invalid;
 visitors.footnoteDefinition = invalid;
-visitors.table = invalid;
-visitors.tableCell = invalid;
 
 /*
  * Expose.

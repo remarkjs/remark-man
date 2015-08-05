@@ -6,10 +6,6 @@ here is: some YAML
 
 ## DESCRIPTION
 
-| This  |  is | a   |
-| :---- | --: | --- |
-| Table |  !! | !   |
-
 This is a paragraph[^1].
 
 This is [^an inline footnote] and also paragraph.
