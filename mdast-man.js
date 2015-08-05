@@ -27,46 +27,24 @@ var compilers = require('./lib/compilers.js');
  */
 function attacher(mdast, options) {
     var settings = options || {};
-    var MarkdownCompiler = mdast.Compiler;
-    var ancestor = MarkdownCompiler.prototype;
-    var proto;
+    var ancestor = mdast.Compiler.prototype;
     var key;
 
     mdast.use(slug, settings.slug);
-
-    /**
-     * Extensible prototype.
-     */
-    function ManCompilerPrototype() {}
-
-    ManCompilerPrototype.prototype = ancestor;
-
-    proto = new ManCompilerPrototype();
-
-    /**
-     * Extensible constructor.
-     */
-    function ManCompiler() {
-        MarkdownCompiler.apply(this, arguments);
-    }
-
-    ManCompiler.prototype = proto;
 
     /*
      * Expose given settings.
      */
 
-    proto.defaultManConfiguration = settings;
+    ancestor.defaultManConfiguration = settings;
 
     /*
      * Expose compiler.
      */
 
     for (key in compilers) {
-        proto[key] = compilers[key];
+        ancestor[key] = compilers[key];
     }
-
-    mdast.Compiler = ManCompiler;
 
     return transformer;
 }
@@ -351,18 +329,26 @@ function link(node, href) {
         url = url.slice(MAILTO.length);
     }
 
-    if (url.charAt(0) === '#') {
-        head = self.headings[url.slice(1)];
+    head = url.charAt(0) === '#' && self.headings[url.slice(1)];
 
-        if (head) {
-            url = '(' + toString(head) + ')';
+    if (head) {
+        url = '(' + escape(toString(head)) + ')';
+    } else {
+        if (value && escape(url) === value) {
+            value = '';
+        }
+
+        if (url) {
+            url = '\\(la' + escape(url) + '\\(ra';
         }
     }
 
-    value = value && escape(url) === value ? '' : value;
+    if (value) {
+        value = self.strong(value);
 
-    if (value && url) {
-        value += ' ';
+        if (url) {
+            value += ' ';
+        }
     }
 
     return value + (url ? self.emphasis(url) : '');

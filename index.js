@@ -26,46 +26,24 @@ var compilers = require('./lib/compilers.js');
  */
 function attacher(mdast, options) {
     var settings = options || {};
-    var MarkdownCompiler = mdast.Compiler;
-    var ancestor = MarkdownCompiler.prototype;
-    var proto;
+    var ancestor = mdast.Compiler.prototype;
     var key;
 
     mdast.use(slug, settings.slug);
-
-    /**
-     * Extensible prototype.
-     */
-    function ManCompilerPrototype() {}
-
-    ManCompilerPrototype.prototype = ancestor;
-
-    proto = new ManCompilerPrototype();
-
-    /**
-     * Extensible constructor.
-     */
-    function ManCompiler() {
-        MarkdownCompiler.apply(this, arguments);
-    }
-
-    ManCompiler.prototype = proto;
 
     /*
      * Expose given settings.
      */
 
-    proto.defaultManConfiguration = settings;
+    ancestor.defaultManConfiguration = settings;
 
     /*
      * Expose compiler.
      */
 
     for (key in compilers) {
-        proto[key] = compilers[key];
+        ancestor[key] = compilers[key];
     }
-
-    mdast.Compiler = ManCompiler;
 
     return transformer;
 }
