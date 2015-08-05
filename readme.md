@@ -1,4 +1,4 @@
-# mdast-man [![Build Status](https://img.shields.io/travis/wooorm/mdast-man.svg?style=flat)](https://travis-ci.org/wooorm/mdast-man) [![Coverage Status](https://img.shields.io/coveralls/wooorm/mdast-man.svg?style=flat)](https://coveralls.io/r/wooorm/mdast-man?branch=master)
+# mdast-man [![Build Status](https://img.shields.io/travis/wooorm/mdast-man.svg)](https://travis-ci.org/wooorm/mdast-man) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/mdast-man.svg)](https://codecov.io/github/wooorm/mdast-man)
 
 **mdast-man** compiles markdown into man pages.  Great unicode support,
 name, section, and description detection, nested block quotes and lists,
