@@ -1,3 +1,11 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:man
+ * @fileoverview Compile Markdown to man pages (roff) with mdast.
+ */
+
 'use strict';
 
 /*

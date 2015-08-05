@@ -1,4 +1,12 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.mdastMan = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:man
+ * @fileoverview Compile Markdown to man pages (roff) with mdast.
+ */
+
 'use strict';
 
 /*
@@ -70,6 +78,14 @@ function attacher(mdast, options) {
 module.exports = attacher;
 
 },{"./lib/compilers.js":2,"./lib/transformer.js":4,"mdast-slug":6}],2:[function(require,module,exports){
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:man:compilers
+ * @fileoverview Compilers to transform mdast nodes to roff.
+ */
+
 'use strict';
 
 /*
@@ -652,6 +668,14 @@ module.exports = visitors;
 module.exports = /ffi|ffl|Ü|ö|Ÿ|∉|Ž|≠|ý|À|ü|Â|û|Ä|ú|Ć|ù|È|š|Ê|à|Ì|á|Î|â|Ñ|ã|Ó|ä|Õ|å|Š|ć|Ú|ç|⊅|è|ž|é|Á|ê|Å|ë|É|≢|Í|⊄|Ò|ì|Ö|í|Û|î|ÿ|ï|Ç|ñ|Ï|õ|ô|ó|ò|Ô|Ë|Ã|Ý|Ù|Τ|⟩|‐|"|–|`|—|\^|‘|\\|’|@|‚|\{|“|\}|”|¡|„|£|†|¥|‡|§|•|©|‰|«|′|®|″|°|‹|²|›|´|‾|¶|⁄|¸|€|º|ℏ|¼|ℑ|¾|℘|Æ|ℜ|×|™|Þ|ℵ|æ|⅛|÷|⅜|þ|⅝|Ĳ|⅞|Ł|←|Œ|↑|ƒ|→|ˇ|↓|˙|↔|˛|↕|Β|↵|Δ|⇐|Ζ|⇑|Θ|⇒|Κ|⇓|Μ|⇔|Ξ|⇕|Π|∀|Σ|∂|Υ|∃|Χ|∅|Ω|∇|β|∈|δ|\/|ζ|∋|θ|∏|κ|∐|μ|∑|ξ|−|π|∓|ς|∗|τ|√|φ|∝|ψ|∞|ϑ|∠|ϖ|∧|_|∨|\[|∩|\||∪|¢|∫|¦|∴|ª|∼|¯|≃|³|≅|·|≈|»|≡|¿|\+|Ø|≤|ð|≥|ı|≪|ł|≫|ȷ|⊂|˚|'|Γ|⊃|Η|\$|Λ|⊆|Ο|⊇|#|⊕|Ψ|⊗|γ|⊥|η|⋅|λ|⌈|ο|⌉|σ|⌊|χ|⌋|ϕ|⎛|\]|⎜|~|⎝|¨|⎞|±|⎟|¹|⎠|Ð|⎢|ø|⎥|œ|⎧|Α|⎨|Ι|⎩|Ρ|⎪|α|⎫|ι|⎬|ρ|⎭|ω|⎯|=|│|¬|□|½|◊|ĳ|○|Ε|☜|Φ|☞|ν|♠|ϵ|♣|µ|˘|⟨|✓|♦|♥|Ν|ß|¤|υ|ε/g;
 
 },{}],4:[function(require,module,exports){
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @module mdast:man:transformer
+ * @fileoverview Transform the syntax-tree of a processed document.
+ */
+
 'use strict';
 
 var visit = require('mdast-util-visit');

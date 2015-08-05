@@ -1,3 +1,10 @@
+/**
+ * @author Titus Wormer
+ * @copyright 2015 Titus Wormer
+ * @license MIT
+ * @fileoverview Tests.
+ */
+
 'use strict';
 
 /* eslint-env mocha */
