@@ -10,7 +10,7 @@ var path = require('path');
 var fs = require('fs');
 var assert = require('assert');
 var mdast = require('mdast');
-var File = require('mdast/lib/file');
+var File = require('vfile');
 var man = require('..');
 
 /*
