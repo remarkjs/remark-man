@@ -2,6 +2,12 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.5.0 / 2015-08-05
+==================
+
+*   Add table support ([0660be5](https://github.com/wooorm/mdast-man/commit/0660be5))
+*   Refactor and fix link output ([3f05dd4](https://github.com/wooorm/mdast-man/commit/3f05dd4))
+
 0.4.3 / 2015-07-22
 ==================
 
