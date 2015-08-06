@@ -2,7 +2,7 @@
 
 **mdast-man** compiles markdown into man pages.  Great unicode support,
 name, section, and description detection, nested block quotes and lists,
-and more.
+tables, and more.
 
 ## Table of Contents
 
