@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+0.5.1 / 2015-08-08
+==================
+
+*   Add support for en- and em-dashes in heading ([70ba4c6](https://github.com/wooorm/mdast-man/commit/70ba4c6))
+
 0.5.0 / 2015-08-05
 ==================
 
