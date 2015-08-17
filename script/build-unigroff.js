@@ -2,6 +2,7 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
+ * @module mdast:man:script:build-unigroff
  * @fileoverview Compile a mapping of unicode characters
  *   to groff-commands.
  */

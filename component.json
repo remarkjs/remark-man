@@ -12,9 +12,9 @@
     "mdast"
   ],
   "dependencies": {
-    "wooorm/mdast-util-to-string": "^0.1.0",
-    "wooorm/mdast-util-visit": "^0.1.1",
-    "wooorm/mdast-slug": "^0.1.0"
+    "wooorm/mdast-util-to-string": "^1.0.0",
+    "wooorm/unist-util-visit": "^1.0.0",
+    "wooorm/mdast-slug": "^1.0.0"
   },
   "repository": "wooorm/mdast-man",
   "scripts": [
