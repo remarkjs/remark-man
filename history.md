@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+1.0.0 / 2015-08-17
+==================
+
+*   Update dependencies, dev-dependencies ([e45bfa6](https://github.com/wooorm/mdast-man/commit/e45bfa6))
+
 0.5.1 / 2015-08-08
 ==================
 
