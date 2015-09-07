@@ -2,6 +2,11 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+1.1.0 / 2015-09-07
+==================
+
+*   Add support for changes in mdast-slug ([0357417](https://github.com/wooorm/mdast-man/commit/0357417))
+
 1.0.0 / 2015-08-17
 ==================
 
