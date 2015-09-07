@@ -14,7 +14,7 @@
   "dependencies": {
     "mdast-util-to-string": "^1.0.0",
     "unist-util-visit": "^1.0.0",
-    "mdast-slug": "^1.0.0"
+    "mdast-slug": "^2.0.0"
   },
   "repository": "wooorm/mdast-man",
   "author": "Titus Wormer <tituswormer@gmail.com>",
