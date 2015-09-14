@@ -587,10 +587,15 @@ function root(node) {
     });
 
     visit(node, 'heading', function (definition) {
-        var id = definition.data.id;
+        var data = definition.data;
+        var id;
 
-        /* istanbul ignore next - legacy mdast-slug */
-        id = id || definition.attributes.id;
+        /* istanbul ignore else - legacy mdast-slug */
+        if ('id' in data) {
+            id = data.id;
+        } else {
+            id = definition.attributes.id;
+        }
 
         headings[id] = definition;
     });
