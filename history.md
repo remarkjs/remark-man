@@ -2,6 +2,13 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+2.0.0 / 2015-12-24
+==================
+
+*   Add temporary warning to `readme.md` ([5e09786](https://github.com/wooorm/remark-man/commit/5e09786))
+*   Rename project `mdast-man` > `remark-man` ([890dd28](https://github.com/wooorm/remark-man/commit/890dd28))
+*   Update fixtures for December ([35bb4b0](https://github.com/wooorm/remark-man/commit/35bb4b0))
+
 1.1.1 / 2015-09-14
 ==================
 
