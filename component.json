@@ -1,7 +1,7 @@
 {
-  "name": "mdast-man",
+  "name": "remark-man",
   "version": "1.1.1",
-  "description": "Compile Markdown to man pages (roff) with mdast",
+  "description": "Compile Markdown to man pages (roff) with remark",
   "license": "MIT",
   "keywords": [
     "markdown",
@@ -9,14 +9,14 @@
     "manual",
     "roff",
     "ronn",
-    "mdast"
+    "remark"
   ],
   "dependencies": {
     "wooorm/mdast-util-to-string": "^1.0.0",
     "wooorm/unist-util-visit": "^1.0.0",
-    "wooorm/mdast-slug": "^1.0.0"
+    "wooorm/remark-slug": "^1.0.0"
   },
-  "repository": "wooorm/mdast-man",
+  "repository": "wooorm/remark-man",
   "scripts": [
     "index.js",
     "lib/"

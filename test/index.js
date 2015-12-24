@@ -2,7 +2,7 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
- * @module mdast:man:test
+ * @module remark:man:test
  * @fileoverview Tests.
  */
 
@@ -80,7 +80,7 @@ function process(file, config) {
  * Tests.
  */
 
-describe('mdast-man()', function () {
+describe('remark-man()', function () {
     it('should be a function', function () {
         assert(typeof man === 'function');
     });

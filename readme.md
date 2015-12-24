@@ -1,6 +1,6 @@
-# mdast-man [![Build Status](https://img.shields.io/travis/wooorm/mdast-man.svg)](https://travis-ci.org/wooorm/mdast-man) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/mdast-man.svg)](https://codecov.io/github/wooorm/mdast-man)
+# remark-man [![Build Status](https://img.shields.io/travis/wooorm/remark-man.svg)](https://travis-ci.org/wooorm/remark-man) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/remark-man.svg)](https://codecov.io/github/wooorm/remark-man)
 
-**mdast-man** compiles markdown into man pages.  Great unicode support,
+**remark-man** compiles markdown into man pages.  Great unicode support,
 name, section, and description detection, nested block quotes and lists,
 tables, and more.
 
@@ -12,7 +12,7 @@ tables, and more.
 
 *   [Programmatic](#programmatic)
 
-    *   [mdast.use(man, options)](#mdastuseman-options)
+    *   [remark.use(man, options)](#remarkuseman-options)
 
 *   [Configuration](#configuration)
 
@@ -23,22 +23,22 @@ tables, and more.
 [npm](https://docs.npmjs.com/cli/install):
 
 ```bash
-npm install mdast-man
+npm install remark-man
 ```
 
-**mdast-man** is also available for [bower](http://bower.io/#install-packages),
+**remark-man** is also available for [bower](http://bower.io/#install-packages),
 [component](https://github.com/componentjs/component), [duo](http://duojs.org/#getting-started),
-and for AMD, CommonJS, and globals ([uncompressed](mdast-man.js) and
-[compressed](mdast-man.min.js)).
+and for AMD, CommonJS, and globals ([uncompressed](remark-man.js) and
+[compressed](remark-man.min.js)).
 
 ## Command line
 
-![Example how mdast-man looks on screen](https://cdn.rawgit.com/wooorm/mdast-man/master/screen-shot.png)
+![Example how remark-man looks on screen](https://cdn.rawgit.com/wooorm/remark-man/master/screen-shot.png)
 
-Use mdast-man together with mdast:
+Use remark-man together with remark:
 
 ```bash
-npm install --global mdast mdast-man
+npm install --global remark remark-man
 ```
 
 Let’s say `example.md` looks as follows:
@@ -51,10 +51,10 @@ Let’s say `example.md` looks as follows:
 `ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`\] \[_file_ _..._\]
 ```
 
-Then, to run **mdast-man** on `example.md`:
+Then, to run **remark-man** on `example.md`:
 
 ```bash
-mdast -u mdast-man example.md -o
+remark -u remark-man example.md -o
 #
 # Yields (check out the newly created `example.1` file):
 #
@@ -73,7 +73,7 @@ To properly view that man page, use something like this: `man ./example.1`.
 
 ## Programmatic
 
-### [mdast](https://github.com/wooorm/mdast#api).[use](https://github.com/wooorm/mdast#mdastuseplugin-options)(man, options)
+### [remark](https://github.com/wooorm/remark#api).[use](https://github.com/wooorm/remark#remarkuseplugin-options)(man, options)
 
 **Parameters**
 
@@ -96,18 +96,18 @@ All options, including the `option` object itself, are optional:
 
 *   `manual` (`string`);
 
-*   `slug` ([`*`](https://github.com/wooorm/mdast-slug#mdastuseslug-options))
-    — Passed to [mdast-slug](https://github.com/wooorm/mdast-slug), used for
+*   `slug` ([`*`](https://github.com/wooorm/remark-slug#remarkuseslug-options))
+    — Passed to [remark-slug](https://github.com/wooorm/remark-slug), used for
     anchor-link detection.
 
-Pass these to `mdast.use()` as a second argument, or on the CLI:
+Pass these to `remark.use()` as a second argument, or on the CLI:
 
 ```bash
-mdast --use 'man=name:"foo",section:2,description:"bar"' example.md
+remark --use 'man=name:"foo",section:2,description:"bar"' example.md
 ```
 
-You can define these in `.mdastrc` or `package.json` [files](https://github.com/wooorm/mdast/blob/master/doc/mdastrc.5.md)
-too. An example `.mdastrc` file could look as follows:
+You can define these in `.remarkrc` or `package.json` [files](https://github.com/wooorm/remark/blob/master/doc/remarkrc.5.md)
+too. An example `.remarkrc` file could look as follows:
 
 ```json
 {
@@ -124,9 +124,9 @@ too. An example `.mdastrc` file could look as follows:
 }
 ```
 
-Where the object at `plugins.man` are the options for **mdast-man**.
-The object at `settings` determines how **mdast** parses (and compiles)
-markdown code.  Read more about the latter on [**mdast**’s readme](https://github.com/wooorm/mdast#mdastprocessvalue-options-done).
+Where the object at `plugins.man` are the options for **remark-man**.
+The object at `settings` determines how **remark** parses (and compiles)
+markdown code.  Read more about the latter on [**remark**’s readme](https://github.com/wooorm/remark#remarkprocessvalue-options-done).
 
 The **name** and **section** can also be inferred from the file’s name:
 `hello-world.1.md` will set `name` to `"hello-world"` and `section` to `"1"`.

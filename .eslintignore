@@ -2,5 +2,5 @@ build/
 components/
 coverage/
 build.js
-mdast-man.js
-mdast-man.min.js
+remark-man.js
+remark-man.min.js

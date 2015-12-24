@@ -1,7 +1,7 @@
 {
-  "name": "mdast-man",
-  "main": "mdast-man.js",
-  "description": "Compile Markdown to man pages (roff) with mdast",
+  "name": "remark-man",
+  "main": "remark-man.js",
+  "description": "Compile Markdown to man pages (roff) with remark",
   "license": "MIT",
   "keywords": [
     "markdown",
@@ -9,11 +9,11 @@
     "manual",
     "roff",
     "ronn",
-    "mdast"
+    "remark"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wooorm/mdast-man.git"
+    "url": "https://github.com/wooorm/remark-man.git"
   },
   "author": {
     "name": "Titus Wormer",

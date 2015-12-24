@@ -2,8 +2,8 @@
  * @author Titus Wormer
  * @copyright 2015 Titus Wormer
  * @license MIT
- * @module mdast:man
- * @fileoverview Compile Markdown to man pages (roff) with mdast.
+ * @module remark:man
+ * @fileoverview Compile Markdown to man pages (roff) with remark.
  */
 
 'use strict';
@@ -12,7 +12,7 @@
  * Dependencies.
  */
 
-var slug = require('mdast-slug');
+var slug = require('remark-slug');
 var transformer = require('./lib/transformer.js');
 var compilers = require('./lib/compilers.js');
 
@@ -20,16 +20,16 @@ var compilers = require('./lib/compilers.js');
  * Attach a roff compiler, and a man-header detection
  * method as a transformer.
  *
- * @param {MDAST} mdast - Processor.
+ * @param {Remark} remark - Processor.
  * @param {Object?} [options] - Configuration.
  * @return {Function} - See `transformer`.
  */
-function attacher(mdast, options) {
+function attacher(remark, options) {
     var settings = options || {};
-    var ancestor = mdast.Compiler.prototype;
+    var ancestor = remark.Compiler.prototype;
     var key;
 
-    mdast.use(slug, settings.slug);
+    remark.use(slug, settings.slug);
 
     /*
      * Expose given settings.
