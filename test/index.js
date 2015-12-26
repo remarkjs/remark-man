@@ -36,7 +36,8 @@ var dirname = path.dirname;
  * Create a `File` from a `filePath`.
  *
  * @param {string} filePath - File-path to virtualize.
- * @return {File}
+ * @param {string} contents - Contents of file.
+ * @return {File} - Virtual file.
  */
 function toFile(filePath, contents) {
     var extension = extname(filePath);
@@ -68,7 +69,7 @@ var fixtures = fs.readdirSync(ROOT);
  *
  * @param {File} file - Virtual file.
  * @param {Object} config - Configuration.
- * @return {string}
+ * @return {string} - Processed `file`.
  */
 function process(file, config) {
     return remark.use(man, config).process(file, {
