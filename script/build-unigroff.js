@@ -17,7 +17,6 @@
 
 var fs = require('fs');
 var dsv = require('d3-dsv');
-var escape = require('escape-string-regexp');
 
 /*
  * Constants.
@@ -27,6 +26,38 @@ var INPUT = 'script/uniglyph.text';
 var OUTPUT = 'lib/uniglyph.json';
 var EXPRESSION = 'lib/expression.js';
 var TEST = 'test/fixtures/entities.7/input.md';
+
+/**
+ * Escape `value`.
+ *
+ * @param {string} value - Value to escape.
+ * @return {string} - Escaped `value`.
+ */
+function charEscape(value) {
+    var result = [];
+    var length = value.length;
+    var index = -1;
+    var hexadecimal;
+    var character;
+    var longhand;
+
+    while (++index < length) {
+        character = value.charAt(index);
+
+        if (/\w/.test(character)) {
+            result[index] = character;
+            continue;
+        }
+
+        hexadecimal = value.charCodeAt(index).toString(16).toUpperCase();
+        longhand = hexadecimal.length > 2;
+
+        result[index] = '\\' + (longhand ? 'u' : 'x') +
+            ('0000' + hexadecimal).slice(longhand ? -4 : -2);
+    }
+
+    return result.join('');
+}
 
 /*
  * Read.
@@ -58,7 +89,7 @@ dsv.tsv.parse(doc).forEach(function (row) {
 
 var expression = new RegExp(Object.keys(map).sort(function (a, b) {
     return a.length > b.length ? -1 : 1;
-}).map(escape).join('|'), 'g');
+}).map(charEscape).join('|'), 'g');
 
 var list = '*   `' + Object.keys(map).map(function (characters) {
     return characters === '`' ? ' ` ' : characters;
