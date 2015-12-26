@@ -8,7 +8,7 @@
 
 'use strict';
 
-/* eslint-env mocha */
+/* eslint-env node */
 
 /*
  * Dependencies.
@@ -16,7 +16,7 @@
 
 var path = require('path');
 var fs = require('fs');
-var assert = require('assert');
+var test = require('tape');
 var remark = require('remark');
 var File = require('vfile');
 var man = require('..');
@@ -80,64 +80,51 @@ function process(file, config) {
  * Tests.
  */
 
-describe('remark-man()', function () {
-    it('should be a function', function () {
-        assert(typeof man === 'function');
-    });
+test('remark-man()', function (t) {
+    t.equal(typeof man, 'function', 'should be a function');
 
-    it('should not throw if not passed options', function () {
-        assert.doesNotThrow(function () {
-            man(remark());
-        });
-    });
+    t.doesNotThrow(function () {
+        man(remark());
+    }, 'should not throw if not passed options');
 
-    it('should work without filename', function () {
-        var fixture = 'nothing';
-        var filepath = join(ROOT, fixture);
-        var output = read(join(filepath, 'output.roff'), 'utf-8');
-        var input = read(join(filepath, 'input.md'), 'utf-8');
-        var config = join(filepath, 'config.json');
-        var file = toFile(fixture + '.md', input);
+    var fixture = 'nothing';
+    var filepath = join(ROOT, fixture);
+    var output = read(join(filepath, 'output.roff'), 'utf-8');
+    var input = read(join(filepath, 'input.md'), 'utf-8');
+    var config = join(filepath, 'config.json');
+    var file = toFile(fixture + '.md', input);
 
-        file.filename = undefined;
+    file.filename = undefined;
 
-        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
+    config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
 
-        assert.equal(process(file, config), output);
-    });
-});
+    t.equal(process(file, config), output, 'should work without filename');
 
-/**
- * Describe a fixtures.
- *
- * @param {string} fixture - Path to fixture to describe.
- */
-function describeFixture(fixture) {
-    it('should work on `' + fixture + '`', function () {
-        var filepath = join(ROOT, fixture);
-        var output = read(join(filepath, 'output.roff'), 'utf-8');
-        var input = read(join(filepath, 'input.md'), 'utf-8');
-        var config = join(filepath, 'config.json');
-        var file = toFile(fixture + '.md', input);
-
-        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
-
-        assert.equal(process(file, config), output);
-    });
-}
-
-/*
- * Gather fixtures.
- */
-
-fixtures = fixtures.filter(function (filepath) {
-    return filepath.indexOf('.') !== 0;
+    t.end();
 });
 
 /*
  * Assert fixtures.
  */
 
-describe('Fixtures', function () {
-    fixtures.forEach(describeFixture);
+test('Fixtures', function (t) {
+    fixtures.filter(function (filepath) {
+        return filepath.indexOf('.') !== 0;
+    }).forEach(function (fixture) {
+        var filepath = join(ROOT, fixture);
+        var output = read(join(filepath, 'output.roff'), 'utf-8');
+        var input = read(join(filepath, 'input.md'), 'utf-8');
+        var config = join(filepath, 'config.json');
+        var file = toFile(fixture + '.md', input);
+
+        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
+
+        t.equal(
+            process(file, config),
+            output,
+            'should work on `' + fixture + '`'
+        );
+    });
+
+    t.end();
 });
