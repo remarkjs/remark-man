@@ -17,7 +17,7 @@
 var path = require('path');
 var fs = require('fs');
 var assert = require('assert');
-var mdast = require('mdast');
+var remark = require('remark');
 var File = require('vfile');
 var man = require('..');
 
@@ -71,7 +71,7 @@ var fixtures = fs.readdirSync(ROOT);
  * @return {string}
  */
 function process(file, config) {
-    return mdast.use(man, config).process(file, {
+    return remark.use(man, config).process(file, {
         'footnotes': true
     });
 }
@@ -87,7 +87,7 @@ describe('remark-man()', function () {
 
     it('should not throw if not passed options', function () {
         assert.doesNotThrow(function () {
-            man(mdast());
+            man(remark());
         });
     });
 
