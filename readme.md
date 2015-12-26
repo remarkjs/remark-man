@@ -27,8 +27,8 @@ npm install remark-man
 ```
 
 **remark-man** is also available for [duo](http://duojs.org/#getting-started),
-and for AMD, CommonJS, and globals ([uncompressed](remark-man.js) and
-[compressed](remark-man.min.js)).
+and as an AMD, CommonJS, and globals module, [uncompressed and
+compressed](https://github.com/wooorm/remark-man/releases).
 
 ## Command line
 
