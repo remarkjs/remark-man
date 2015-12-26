@@ -2,6 +2,15 @@
 
 <!--lint disable no-multiple-toplevel-headings -->
 
+2.0.1 / 2015-12-26
+==================
+
+*   Fix build by escaping special characters ([896cc72](https://github.com/wooorm/remark-man/commit/896cc72))
+*   Remove distribution files from source ([5374dc8](https://github.com/wooorm/remark-man/commit/5374dc8))
+*   Remove support for bower ([49860e2](https://github.com/wooorm/remark-man/commit/49860e2))
+*   Refactor to replace mocha with tape ([b9c5417](https://github.com/wooorm/remark-man/commit/b9c5417))
+*   Replace internal dependency of mdast > remark ([5ba91bc](https://github.com/wooorm/remark-man/commit/5ba91bc))
+
 2.0.0 / 2015-12-24
 ==================
 
