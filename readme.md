@@ -26,8 +26,7 @@ tables, and more.
 npm install remark-man
 ```
 
-**remark-man** is also available for [bower](http://bower.io/#install-packages),
-[component](https://github.com/componentjs/component), [duo](http://duojs.org/#getting-started),
+**remark-man** is also available for [duo](http://duojs.org/#getting-started),
 and for AMD, CommonJS, and globals ([uncompressed](remark-man.js) and
 [compressed](remark-man.min.js)).
 
