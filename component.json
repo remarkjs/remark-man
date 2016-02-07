@@ -14,7 +14,7 @@
   "dependencies": {
     "wooorm/mdast-util-to-string": "^1.0.0",
     "wooorm/unist-util-visit": "^1.0.0",
-    "wooorm/remark-slug": "^1.0.0"
+    "wooorm/remark-slug": "^4.0.0"
   },
   "repository": "wooorm/remark-man",
   "scripts": [

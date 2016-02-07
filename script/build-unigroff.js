@@ -71,7 +71,7 @@ var doc = fs.readFileSync(INPUT, 'utf-8');
 
 var map = {};
 
-dsv.tsv.parse(doc).forEach(function (row) {
+dsv.tsvParse(doc).forEach(function (row) {
     var characters = row.unicode.split('_').map(function (point) {
         return String.fromCharCode(parseInt(point, 16));
     }).join('');
