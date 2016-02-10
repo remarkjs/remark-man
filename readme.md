@@ -1,40 +1,27 @@
-# remark-man [![Build Status](https://img.shields.io/travis/wooorm/remark-man.svg)](https://travis-ci.org/wooorm/remark-man) [![Coverage Status](https://img.shields.io/codecov/c/github/wooorm/remark-man.svg)](https://codecov.io/github/wooorm/remark-man)
+# remark-man [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
 
-**remark-man** compiles markdown into man pages.  Great unicode support,
-name, section, and description detection, nested block quotes and lists,
-tables, and more.
-
-## Table of Contents
-
-*   [Installation](#installation)
-
-*   [Command line](#command-line)
-
-*   [Programmatic](#programmatic)
-
-    *   [remark.use(man, options)](#remarkuseman-options)
-
-*   [Configuration](#configuration)
-
-*   [License](#license)
+Compile markdown to man pages.  Great unicode support, name, section,
+and description detection, nested block quotes and lists, tables, and
+more.
 
 ## Installation
 
-[npm](https://docs.npmjs.com/cli/install):
+[npm][npm-install]:
 
 ```bash
 npm install remark-man
 ```
 
-**remark-man** is also available for [duo](http://duojs.org/#getting-started),
-and as an AMD, CommonJS, and globals module, [uncompressed and
-compressed](https://github.com/wooorm/remark-man/releases).
+**remark-man** is also available for [duo][duo-install], and as an
+AMD, CommonJS, and globals module, [uncompressed and compressed][releases].
+
+## Usage
 
 ## Command line
 
-![Example how remark-man looks on screen](https://cdn.rawgit.com/wooorm/remark-man/master/screen-shot.png)
+![Example how remark-man looks on screen][screenshot]
 
-Use remark-man together with remark:
+Use `remark-man` together with **remark**:
 
 ```bash
 npm install --global remark remark-man
@@ -50,85 +37,52 @@ Let’s say `example.md` looks as follows:
 `ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`\] \[_file_ _..._\]
 ```
 
-Then, to run **remark-man** on `example.md`:
+Then, run **remark-man** on `example.md`:
 
 ```bash
 remark -u remark-man example.md -o
-#
-# Yields (check out the newly created `example.1` file):
-#
-# .TH "LS" "1" "June 2015" "" ""
-# .SH "NAME"
-# \fBls\fR - list directory contents
-# .SH "SYNOPSIS"
-# .P
-# \fBls\fR \[lB]\fB-ABCFGHLOPRSTUW\[at]abcdefghiklmnopqrstuwx1\fR\[rB] \[lB]\fIfile\fR \fI...\fR\[rB]
-#
+```
+
+Yields (check out the newly created `example.1` file):
+
+```roff
+.TH "LS" "1" "February 2016" "" ""
+.SH "NAME"
+\fBls\fR - list directory contents
+.SH "SYNOPSIS"
+.P
+\fBls\fR \[lB]\fB-ABCFGHLOPRSTUW\[at]abcdefghiklmnopqrstuwx1\fR\[rB] \[lB]\fIfile\fR \fI...\fR\[rB]
 ```
 
 Now, that looks horrible, but that’s how roff/groff/troff are :wink:.
 
 To properly view that man page, use something like this: `man ./example.1`.
 
-## Programmatic
+## API
 
-### [remark](https://github.com/wooorm/remark#api).[use](https://github.com/wooorm/remark#remarkuseplugin-options)(man, options)
+### `remark.use(man[, options])`
 
-**Parameters**
+**Options** (`Object?`):
 
-*   `man` — This plugin;
-*   `options` (`Object?`) — See below.
+*   `name` (`string`, optional);
 
-## Configuration
+*   `section` (`number` or `string`, optional);
 
-All options, including the `option` object itself, are optional:
+*   `description` (`string`, optional);
 
-*   `name` (`string`);
+*   `date` (given to `new Date()`, optional);
 
-*   `section` (`number` or `string`);
+*   `version` (`string`, optional);
 
-*   `description` (`string`);
+*   `manual` (`string`, optional);
 
-*   `date` (given to `new Date()`);
-
-*   `version` (`string`);
-
-*   `manual` (`string`);
-
-*   `slug` ([`*`](https://github.com/wooorm/remark-slug#remarkuseslug-options))
-    — Passed to [remark-slug](https://github.com/wooorm/remark-slug), used for
-    anchor-link detection.
-
-Pass these to `remark.use()` as a second argument, or on the CLI:
-
-```bash
-remark --use 'man=name:"foo",section:2,description:"bar"' example.md
-```
-
-You can define these in `.remarkrc` or `package.json` [files](https://github.com/wooorm/remark/blob/master/doc/remarkrc.5.md)
-too. An example `.remarkrc` file could look as follows:
-
-```json
-{
-  "plugins": {
-    "man": {
-        "manual": "Phonetic Alphabet",
-        "version": "0.1.0",
-        "date": "2015-06-01"
-    }
-  },
-  "settings": {
-    "commonmark": true
-  }
-}
-```
-
-Where the object at `plugins.man` are the options for **remark-man**.
-The object at `settings` determines how **remark** parses (and compiles)
-markdown code.  Read more about the latter on [**remark**’s readme](https://github.com/wooorm/remark#remarkprocessvalue-options-done).
+*   `slug` ([`*`](https://github.com/wooorm/remark-slug#remarkuseslug-options),
+    optional) — Passed to [remark-slug](https://github.com/wooorm/remark-slug),
+    used for anchor-link detection.
 
 The **name** and **section** can also be inferred from the file’s name:
-`hello-world.1.md` will set `name` to `"hello-world"` and `section` to `"1"`.
+`hello-world.1.md` will set `name` to `"hello-world"` and `section` to
+`"1"`.
 
 In addition, you can also provide inline configuration with a main heading:
 
@@ -139,9 +93,31 @@ In addition, you can also provide inline configuration with a main heading:
 ...will set `name` to `"hello-world"`, `section` to `"7"`, and `description`
 to `"Two common words"`.
 
-The main heading overwrites the file name, and the file name the plugin
-settings.
+The main heading has precedence over the file name, and the file name
+over the plugin settings.
 
 ## License
 
-[MIT](LICENSE) © [Titus Wormer](http://wooorm.com)
+[MIT][license] © [Titus Wormer][author]
+
+<!-- Definitions -->
+
+[travis-badge]: https://img.shields.io/travis/wooorm/remark-man.svg
+
+[travis]: https://travis-ci.org/wooorm/remark-man
+
+[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-man.svg
+
+[codecov]: https://codecov.io/github/wooorm/remark-man
+
+[npm-install]: https://docs.npmjs.com/cli/install
+
+[duo-install]: http://duojs.org/#getting-started
+
+[releases]: https://github.com/wooorm/remark-man/releases
+
+[license]: LICENSE
+
+[author]: http://wooorm.com
+
+[screenshot]: https://cdn.rawgit.com/wooorm/remark-man/master/screenshot.png
