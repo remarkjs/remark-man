@@ -31,6 +31,10 @@ function attacher(remark, options) {
     var ancestor = remark.Compiler.prototype;
     var key;
 
+    /*
+     * Use `slug`.
+     */
+
     remark.use(slug, settings.slug);
 
     /*
@@ -40,7 +44,7 @@ function attacher(remark, options) {
     ancestor.defaultManConfiguration = settings;
 
     /*
-     * Expose compiler.
+     * Expose visitor.
      */
 
     for (key in compilers) {
