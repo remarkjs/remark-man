@@ -16,8 +16,18 @@
     "unist-util-visit": "^1.0.0",
     "remark-slug": "^4.0.0"
   },
-  "repository": "wooorm/remark-man",
-  "author": "Titus Wormer <tituswormer@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wooorm/remark-man.git"
+  },
+  "bugs": "https://github.com/wooorm/remark-man/issues",
+  "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
+  "contributors": [
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
   "files": [
     "index.js",
     "lib/"
