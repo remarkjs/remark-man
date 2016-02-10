@@ -12,8 +12,8 @@ more.
 npm install remark-man
 ```
 
-**remark-man** is also available for [duo][duo-install], and as an
-AMD, CommonJS, and globals module, [uncompressed and compressed][releases].
+**remark-man** is also available as an AMD, CommonJS, and globals
+module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -111,8 +111,6 @@ over the plugin settings.
 [codecov]: https://codecov.io/github/wooorm/remark-man
 
 [npm-install]: https://docs.npmjs.com/cli/install
-
-[duo-install]: http://duojs.org/#getting-started
 
 [releases]: https://github.com/wooorm/remark-man/releases
 
