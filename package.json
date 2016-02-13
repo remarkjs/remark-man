@@ -1,6 +1,6 @@
 {
   "name": "remark-man",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Compile Markdown to man pages (roff) with remark",
   "license": "MIT",
   "keywords": [
