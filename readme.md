@@ -1,4 +1,4 @@
-# remark-man [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov]
+# remark-man [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov] [![remark][remark-badge]][remark]
 
 Compile markdown to man pages.  Great unicode support, name, section,
 and description detection, nested block quotes and lists, tables, and
@@ -119,3 +119,7 @@ over the plugin settings.
 [author]: http://wooorm.com
 
 [screenshot]: https://cdn.rawgit.com/wooorm/remark-man/master/screenshot.png
+
+[remark]: https://github.com/wooorm/remark
+
+[remark-badge]: https://img.shields.io/badge/remark-4.0.0-brightgreen.svg
