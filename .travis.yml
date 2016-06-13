@@ -6,7 +6,8 @@ node_js:
 - '4.0'
 - '5.0'
 - iojs
-after_script: npm install codecov.io && cat ./coverage/lcov.info | codecov
+after_success:
+- bash <(curl -s https://codecov.io/bash)
 sudo: false
 deploy:
   - provider: npm
