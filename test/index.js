@@ -9,6 +9,7 @@
 'use strict';
 
 /* eslint-env node */
+/* jscs:disable jsDoc */
 
 /*
  * Dependencies.
@@ -20,6 +21,18 @@ var test = require('tape');
 var remark = require('remark');
 var File = require('vfile');
 var man = require('..');
+
+/* Constants. */
+var ODate = global.Date;
+
+global.Date = function (val) {
+    /* Timestamp: of https://github.com/wooorm/remark-man/commit/53d7fd7 */
+    return new ODate(val || 1454861068000);
+}
+
+test.onFinish(function () {
+    global.Date = ODate;
+});
 
 /*
  * Methods.
@@ -72,9 +85,9 @@ var fixtures = fs.readdirSync(ROOT);
  * @return {string} - Processed `file`.
  */
 function process(file, config) {
-    return remark.use(man, config).process(file, {
+    return remark().use(man, config).process(file, {
         'footnotes': true
-    });
+    }).toString();
 }
 
 /*
