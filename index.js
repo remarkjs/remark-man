@@ -35,7 +35,7 @@ function attacher(remark, options) {
      * Use `slug`.
      */
 
-    remark.use(slug, settings.slug);
+    remark.use(slug);
 
     /*
      * Expose given settings.

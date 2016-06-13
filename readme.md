@@ -1,12 +1,14 @@
-# remark-man [![Build Status][travis-badge]][travis] [![Coverage Status][codecov-badge]][codecov] [![remark][remark-badge]][remark]
+# remark-man [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
 
-Compile markdown to man pages.  Great unicode support, name, section,
-and description detection, nested block quotes and lists, tables, and
-more.
+<!--lint disable list-item-spacing heading-increment-->
+
+Compile markdown to man pages with [**remark**][remark].  Great unicode
+support; name, section, and description detection; nested block quotes
+and lists; tables; and much more.
 
 ## Installation
 
-[npm][npm-install]:
+[npm][]:
 
 ```bash
 npm install remark-man
@@ -21,10 +23,10 @@ module, [uncompressed and compressed][releases].
 
 ![Example how remark-man looks on screen][screenshot]
 
-Use `remark-man` together with **remark**:
+Use `remark-man` together with [`remark-cli`][cli]:
 
 ```bash
-npm install --global remark remark-man
+npm install --global remark-cli remark-man
 ```
 
 Let’s say `example.md` looks as follows:
@@ -37,13 +39,8 @@ Let’s say `example.md` looks as follows:
 `ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`\] \[_file_ _..._\]
 ```
 
-Then, run **remark-man** on `example.md`:
-
-```bash
-remark -u remark-man example.md -o
-```
-
-Yields (check out the newly created `example.1` file):
+Now, running `remark example.md -u remark-man --output` yields a new
+file, `example.1`:
 
 ```roff
 .TH "LS" "1" "February 2016" "" ""
@@ -60,38 +57,38 @@ To properly view that man page, use something like this: `man ./example.1`.
 
 ## API
 
+Use `remark-man` together with [`remark`][api]:
+
+```sh
+npm install remark remark-man
+```
+
 ### `remark.use(man[, options])`
 
-**Options** (`Object?`):
+Compile markdown to a man page.
+
+###### `options`
 
 *   `name` (`string`, optional);
-
 *   `section` (`number` or `string`, optional);
-
 *   `description` (`string`, optional);
-
 *   `date` (given to `new Date()`, optional);
-
 *   `version` (`string`, optional);
-
-*   `manual` (`string`, optional);
-
-*   `slug` ([`*`](https://github.com/wooorm/remark-slug#remarkuseslug-options),
-    optional) — Passed to [remark-slug](https://github.com/wooorm/remark-slug),
-    used for anchor-link detection.
+*   `manual` (`string`, optional).
 
 The **name** and **section** can also be inferred from the file’s name:
 `hello-world.1.md` will set `name` to `"hello-world"` and `section` to
 `"1"`.
 
-In addition, you can also provide inline configuration with a main heading:
+In addition, you can also provide inline configuration with a main
+heading.  The following file:
 
-```markdown
+```md
 # hello-world(7) -- Two common words
 ```
 
-...will set `name` to `"hello-world"`, `section` to `"7"`, and `description`
-to `"Two common words"`.
+...will set `name` to `"hello-world"`, `section` to `"7"`, and
+`description` to `"Two common words"`.
 
 The main heading has precedence over the file name, and the file name
 over the plugin settings.
@@ -102,15 +99,17 @@ over the plugin settings.
 
 <!-- Definitions -->
 
-[travis-badge]: https://img.shields.io/travis/wooorm/remark-man.svg
+[build-badge]: https://img.shields.io/travis/wooorm/remark-man.svg
 
-[travis]: https://travis-ci.org/wooorm/remark-man
+[build-status]: https://travis-ci.org/wooorm/remark-man
 
-[codecov-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-man.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-man.svg
 
-[codecov]: https://codecov.io/github/wooorm/remark-man
+[coverage-status]: https://codecov.io/github/wooorm/remark-man
 
-[npm-install]: https://docs.npmjs.com/cli/install
+[chat-badge]: https://img.shields.io/gitter/room/wooorm/remark.svg
+
+[chat]: https://gitter.im/wooorm/remark
 
 [releases]: https://github.com/wooorm/remark-man/releases
 
@@ -118,8 +117,12 @@ over the plugin settings.
 
 [author]: http://wooorm.com
 
-[screenshot]: https://cdn.rawgit.com/wooorm/remark-man/master/screenshot.png
+[npm]: https://docs.npmjs.com/cli/install
 
 [remark]: https://github.com/wooorm/remark
 
-[remark-badge]: https://img.shields.io/badge/remark-4.0.0-brightgreen.svg
+[api]: https://github.com/wooorm/remark/tree/master/packages/remark
+
+[cli]: https://github.com/wooorm/remark/tree/master/packages/remark-cli
+
+[screenshot]: https://cdn.rawgit.com/wooorm/remark-man/master/screenshot.png

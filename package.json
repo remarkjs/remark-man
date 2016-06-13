@@ -51,7 +51,7 @@
   },
   "scripts": {
     "build-uniglyph": "bash script/build-unigroff.sh",
-    "build-md": "remark . --quiet",
+    "build-md": "remark . --quiet --frail",
     "build-bundle": "browserify index.js --bare -s remarkMan > remark-man.js",
     "build-mangle": "esmangle remark-man.js > remark-man.min.js",
     "build": "npm run build-uniglyph && npm run build-md && npm run build-bundle && npm run build-mangle",
