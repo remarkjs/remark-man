@@ -8,137 +8,76 @@
 
 'use strict';
 
-/* eslint-env node */
-/* jscs:disable jsDoc */
-
-/*
- * Dependencies.
- */
-
+/* Dependencies. */
 var path = require('path');
 var fs = require('fs');
 var test = require('tape');
 var remark = require('remark');
-var File = require('vfile');
+var vfile = require('vfile');
+var hidden = require('is-hidden');
+var not = require('negate');
 var man = require('..');
 
-/* Constants. */
-var ODate = global.Date;
-
-global.Date = function (val) {
-    /* Timestamp: of https://github.com/wooorm/remark-man/commit/53d7fd7 */
-    return new ODate(val || 1454861068000);
-}
-
-test.onFinish(function () {
-    global.Date = ODate;
-});
-
-/*
- * Methods.
- */
-
+/* Methods. */
 var read = fs.readFileSync;
 var exists = fs.existsSync;
 var join = path.join;
-var basename = path.basename;
-var extname = path.extname;
-var dirname = path.dirname;
 
-/**
- * Create a `File` from a `filePath`.
- *
- * @param {string} filePath - File-path to virtualize.
- * @param {string} contents - Contents of file.
- * @return {File} - Virtual file.
- */
-function toFile(filePath, contents) {
-    var extension = extname(filePath);
-    var directory = dirname(filePath);
-    var name = basename(filePath, extension);
-
-    return new File({
-        'directory': directory,
-        'filename': name,
-        'extension': extension.slice(1),
-        'contents': contents
-    });
-}
-
-/*
- * Constants.
- */
-
+/* Constants. */
 var ROOT = join(__dirname, 'fixtures');
 
-/*
- * Fixtures.
- */
+/* Fixtures. */
+var fixtures = fs.readdirSync(ROOT).filter(not(hidden));
 
-var fixtures = fs.readdirSync(ROOT);
-
-/**
- * Shortcut to process.
- *
- * @param {File} file - Virtual file.
- * @param {Object} config - Configuration.
- * @return {string} - Processed `file`.
- */
+/* Shortcut to process. */
 function process(file, config) {
-    return remark().use(man, config).process(file, {
-        'footnotes': true
-    }).toString();
+  return remark().use(man, config).process(file, {footnotes: true}).toString();
 }
 
-/*
- * Tests.
- */
+/* Hack so the tests don’t need updating everytime... */
+var ODate = global.Date;
 
-test('remark-man()', function (t) {
-    t.equal(typeof man, 'function', 'should be a function');
+global.Date = function (val) {
+  /* Timestamp: of https://github.com/wooorm/remark-man/commit/53d7fd7 */
+  return new ODate(val || 1454861068000);
+};
 
-    t.doesNotThrow(function () {
-        man(remark());
-    }, 'should not throw if not passed options');
-
-    var fixture = 'nothing';
-    var filepath = join(ROOT, fixture);
-    var output = read(join(filepath, 'output.roff'), 'utf-8');
-    var input = read(join(filepath, 'input.md'), 'utf-8');
-    var config = join(filepath, 'config.json');
-    var file = toFile(fixture + '.md', input);
-
-    file.filename = undefined;
-
-    config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
-
-    t.equal(process(file, config), output, 'should work without filename');
-
-    t.end();
+test.onFinish(function () {
+  global.Date = ODate;
 });
 
-/*
- * Assert fixtures.
- */
+/* Tests. */
+test('remark-man()', function (t) {
+  t.equal(typeof man, 'function', 'should be a function');
 
+  t.doesNotThrow(function () {
+    man(remark());
+  }, 'should not throw if not passed options');
+
+  t.equal(
+    process(vfile({
+      contents: read(join(ROOT, 'nothing', 'input.md'))
+    })),
+    read(join(ROOT, 'nothing', 'output.roff'), 'utf8'),
+    'should work without filename'
+  );
+
+  t.end();
+});
+
+/* Fixtures. */
 test('Fixtures', function (t) {
-    fixtures.filter(function (filepath) {
-        return filepath.indexOf('.') !== 0;
-    }).forEach(function (fixture) {
-        var filepath = join(ROOT, fixture);
-        var output = read(join(filepath, 'output.roff'), 'utf-8');
-        var input = read(join(filepath, 'input.md'), 'utf-8');
-        var config = join(filepath, 'config.json');
-        var file = toFile(fixture + '.md', input);
+  fixtures.forEach(function (fixture) {
+    var filepath = join(ROOT, fixture);
+    var output = read(join(filepath, 'output.roff'), 'utf8');
+    var input = read(join(filepath, 'input.md'));
+    var config = join(filepath, 'config.json');
+    var file = vfile({path: fixture + '.md', contents: input});
 
-        config = exists(config) ? JSON.parse(read(config, 'utf-8')) : {};
+    config = exists(config) ? JSON.parse(read(config, 'utf8')) : {};
 
-        t.equal(
-            process(file, config),
-            output,
-            'should work on `' + fixture + '`'
-        );
-    });
+    t.equal(process(file, config), output, fixture);
+  });
 
-    t.end();
+  t.end();
 });

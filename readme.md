@@ -1,7 +1,5 @@
 # remark-man [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
 
-<!--lint disable list-item-spacing heading-increment-->
-
 Compile markdown to man pages with [**remark**][remark].  Great unicode
 support; name, section, and description detection; nested block quotes
 and lists; tables; and much more.
@@ -13,9 +11,6 @@ and lists; tables; and much more.
 ```bash
 npm install remark-man
 ```
-
-**remark-man** is also available as an AMD, CommonJS, and globals
-module, [uncompressed and compressed][releases].
 
 ## Usage
 
@@ -39,7 +34,7 @@ Let’s say `example.md` looks as follows:
 `ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`\] \[_file_ _..._\]
 ```
 
-Now, running `remark example.md -u remark-man --output` yields a new
+Now, running `remark example.md --use man --output` yields a new
 file, `example.1`:
 
 ```roff
@@ -60,7 +55,7 @@ To properly view that man page, use something like this: `man ./example.1`.
 Use `remark-man` together with [`remark`][api]:
 
 ```sh
-npm install remark remark-man
+npm install remark remark-man --save
 ```
 
 ### `remark.use(man[, options])`
@@ -110,8 +105,6 @@ over the plugin settings.
 [chat-badge]: https://img.shields.io/gitter/room/wooorm/remark.svg
 
 [chat]: https://gitter.im/wooorm/remark
-
-[releases]: https://github.com/wooorm/remark-man/releases
 
 [license]: LICENSE
 

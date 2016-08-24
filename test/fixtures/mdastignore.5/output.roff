@@ -18,13 +18,13 @@ Lines are trimmed of initial and final white space;
 .IP \(bu 4
 Empty lines are ignored;
 .IP \(bu 4
-Lines which start with an octothorp (\fB\[sh]\fR) are ignored;
+Lines which start with an octothorp (\fB#\fR) are ignored;
 .IP \(bu 4
 Lines which start with a interrogation-mark (\fB!\fR) negate, thus re-adding a previously ignored file path;
 .RE 0
 
 .P
-For documentation regarding the glob engine itself, such as wild-cards (\fB*\fR, \fB?\fR), brace expressions (\fB\[lC]one,two\[rC]\fR), see \fBminimist\fR(1).
+For documentation regarding the glob engine itself, such as wild-cards (\fB*\fR, \fB?\fR), brace expressions (\fB{one,two}\fR), see \fBminimist\fR(1).
 .P
 You can pass a \fBgitignore\fR(5) file to \fBmdast\fR(1), because it has the same format as \fBmdastignore\fR(5):
 .P
@@ -36,15 +36,15 @@ mdast --ignore-path .gitignore
 .P
 \fBmdast\fR(1) searches for files with \fI.md\fR, \fI.mkd\fR, \fI.mkdn\fR, \fI.mkdown\fR, \fI.markdown\fR, or \fI.ron\fR as extension. Other files can be explicitly provided to \fBmdast\fR(1), or an \fBextension\fR can be given to \fBmdast\fR(1) using the \fB--extension, -e\fR flag.
 .P
-In addition to patterns in \fBmdastignore\fR(5) files, \fInode\[ul]modules\[sl]**\fR are always excluded.
+In addition to patterns in \fBmdastignore\fR(5) files, \fInode_modules/**\fR are always excluded.
 .P
 Unless provided directly to \fBmdast\fR(1), hidden directories (such as \fI.git\fR) are excluded.
 .SH "BUGS"
 .P
-\fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]issues\(ra\fR
+\fI\(lahttps://github.com/wooorm/mdast/issues\(ra\fR
 .SH "SEE ALSO"
 .P
 \fBmdast\fR(1), \fBmdastrc\fR(5), \fBmdastconfig\fR(7).
 .SH "AUTHOR"
 .P
-Written by Titus Wormer \fI\(latituswormer\[at]gmail.com\(ra\fR
+Written by Titus Wormer \fI\(latituswormer@gmail.com\(ra\fR

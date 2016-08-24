@@ -19,7 +19,7 @@ Plug-ins can configure mdast, for example, \fBmdast-yaml-config\fR allows per-fi
 .RE 0
 
 .P
-For a list of available configuration options, see the SETTINGS section below or \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]options.md\(ra\fR.
+For a list of available configuration options, see the SETTINGS section below or \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/options.md\(ra\fR.
 .SS "SETTINGS FOR \fBPROCESS\fR, \fBPARSE()\fR, AND \fBSTRINGIFY()\fR"
 .P
 To configure the programatic interface of \fBmdast\fR, pass an object as a second parameter to \fBprocess()\fR, \fBparse()\fR, and \fBstringify()\fR.
@@ -30,9 +30,9 @@ To configure the shell interface of \fBmdast\fR, pass a string to the \fB--setti
 Command line settings are just JSON, with two exceptions:
 .RS 0
 .IP \(bu 4
-Keys do not need to be escaped, thus, both \fB\[dq]foo\[dq]: \[dq]bar\[dq]\fR and \fBfoo: \[dq]bar\[dq]\fR are considered equal;
+Keys do not need to be escaped, thus, both \fB"foo": "bar"\fR and \fBfoo: "bar"\fR are considered equal;
 .IP \(bu 4
-The surrounding braces must not be used: \fB\[dq]foo\[dq]: 1\fR, is first wrapped as \fB\[lC]\[dq]foo\[dq]: 1\[rC]\fR, and then passed to \fBJSON.parse\fR.
+The surrounding braces must not be used: \fB"foo": 1\fR, is first wrapped as \fB{"foo": 1}\fR, and then passed to \fBJSON.parse\fR.
 .RE 0
 
 .P
@@ -40,9 +40,9 @@ Valid examples are:
 .P
 .RS 2
 .nf
-mdast --setting \[dq]foo:true\[dq] --setting \[dq]\[rs]\[dq]bar\[rs]\[dq]: \[rs]\[dq]baz\[rs]\[dq]\[dq]
-mdast --setting \[dq]foo-bar:-2\[dq]
-mdast --setting \[dq]foo: false, bar-baz: \[lB]\[rs]\[dq]qux\[rs]\[dq], 1\[rB]\[dq]
+mdast --setting "foo:true" --setting "\[rs]"bar\[rs]": \[rs]"baz\[rs]""
+mdast --setting "foo-bar:-2"
+mdast --setting "foo: false, bar-baz: \[lB]\[rs]"qux\[rs]", 1\[rB]"
 .fi
 .RE
 .P
@@ -53,7 +53,7 @@ Specify directory specific settings with \fB.mdastrc\fR and \fBpackage.json\fR f
 .SH "SETTINGS"
 .SS "PARSE"
 .P
-See \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]options.md\[sh]parse\(ra\fR for a description of these settings.
+See \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/options.md#parse\(ra\fR for a description of these settings.
 .RS 0
 .IP \(bu 4
 \fBposition\fR (boolean, default: true);
@@ -73,10 +73,10 @@ See \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[
 
 .SS "STRINGIFY"
 .P
-See \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]options.md\[sh]stringify\(ra\fR for a description of these settings.
+See \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/options.md#stringify\(ra\fR for a description of these settings.
 .RS 0
 .IP \(bu 4
-\fBentities\fR (\fBfalse\fR, \fBtrue\fR, or \fB\[dq]numbers\[dq]\fR, default: \fBfalse\fR);
+\fBentities\fR (\fBfalse\fR, \fBtrue\fR, or \fB"numbers"\fR, default: \fBfalse\fR);
 .IP \(bu 4
 \fBsetext\fR (boolean, default: \fBfalse\fR);
 .IP \(bu 4
@@ -90,27 +90,27 @@ See \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[
 .IP \(bu 4
 \fBfences\fR (boolean, default: \fBfalse\fR);
 .IP \(bu 4
-\fBfence\fR (\fB\[dq]\[ti]\[dq]\fR or \fB\[dq]\[ga]\[dq]\fR, default: \fB\[dq]\[ga]\[dq]\fR);
+\fBfence\fR (\fB"~"\fR or \fB"`"\fR, default: \fB"`"\fR);
 .IP \(bu 4
-\fBbullet\fR (\fB\[dq]-\[dq]\fR, \fB\[dq]*\[dq]\fR, or \fB\[dq]\[pl]\[dq]\fR, default: \fB\[dq]-\[dq]\fR);
+\fBbullet\fR (\fB"-"\fR, \fB"*"\fR, or \fB"+"\fR, default: \fB"-"\fR);
 .IP \(bu 4
-\fBrule\fR (\fB\[dq]-\[dq]\fR, \fB\[dq]\[rs]*\[dq]\fR, or \fB\[dq]\[ul]\[dq]\fR, default: \fB\[dq]*\[dq]\fR);
+\fBrule\fR (\fB"-"\fR, \fB"\[rs]*"\fR, or \fB"_"\fR, default: \fB"*"\fR);
 .IP \(bu 4
 \fBruleRepetition\fR (number, default: \fB3\fR);
 .IP \(bu 4
 \fBruleSpaces\fR (boolean, default: \fBfalse\fR);
 .IP \(bu 4
-\fBstrong\fR (\fB\[dq]\[ul]\[dq]\fR or \fB\[dq]\[rs]*\[dq]\fR, default: \fB\[dq]*\[dq]\fR);
+\fBstrong\fR (\fB"_"\fR or \fB"\[rs]*"\fR, default: \fB"*"\fR);
 .IP \(bu 4
-\fBemphasis\fR (\fB\[dq]\[rs]\[ul]\[dq]\fR or \fB\[dq]*\[dq]\fR, default: \fB\[dq]\[ul]\[dq]\fR).
+\fBemphasis\fR (\fB"\[rs]_"\fR or \fB"*"\fR, default: \fB"_"\fR).
 .RE 0
 
 .SH "BUGS"
 .P
-\fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]issues\(ra\fR
+\fI\(lahttps://github.com/wooorm/mdast/issues\(ra\fR
 .SH "SEE ALSO"
 .P
 \fBmdast\fR(1), \fBmdast\fR(3), \fBmdastrc\fR(5), \fBmdastignore\fR(5).
 .SH "AUTHOR"
 .P
-Written by Titus Wormer \fI\(latituswormer\[at]gmail.com\(ra\fR
+Written by Titus Wormer \fI\(latituswormer@gmail.com\(ra\fR

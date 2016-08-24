@@ -11,55 +11,68 @@
     "ronn",
     "remark"
   ],
-  "dependencies": {
-    "mdast-util-to-string": "^1.0.0",
-    "unist-util-visit": "^1.0.0",
-    "remark-slug": "^4.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wooorm/remark-man.git"
-  },
+  "repository": "https://github.com/wooorm/remark-man",
   "bugs": "https://github.com/wooorm/remark-man/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.11.0"
+  },
+  "dependencies": {
+    "github-slugger": "^1.1.1",
+    "groff-escape": "^1.0.0",
+    "mapz": "^1.0.0",
+    "mdast-util-to-string": "^1.0.0",
+    "months": "^1.0.1",
+    "unist-util-visit": "^1.0.0",
+    "zwitch": "^1.0.0"
   },
   "files": [
-    "index.js",
-    "lib/"
+    "lib",
+    "index.js"
   ],
   "devDependencies": {
     "browserify": "^13.0.0",
-    "d3-dsv": "^0.4.0",
-    "eslint": "^2.0.0",
     "esmangle": "^1.0.0",
-    "istanbul": "^0.4.0",
-    "jscs": "^3.0.0",
-    "jscs-jsdoc": "^2.0.0",
-    "remark": "^5.0.0",
-    "remark-cli": "^1.0.0",
-    "remark-comment-config": "^4.0.0",
-    "remark-github": "^5.0.0",
-    "remark-lint": "^4.0.0",
-    "remark-validate-links": "^4.0.0",
-    "tape": "^4.0.0",
-    "vfile": "^1.0.0"
+    "is-hidden": "^1.0.1",
+    "negate": "^1.0.0",
+    "nyc": "^8.0.0",
+    "remark": "^6.0.0",
+    "remark-cli": "^2.0.0",
+    "remark-preset-wooorm": "^1.0.0",
+    "tape": "^4.4.0",
+    "vfile": "^2.0.0",
+    "xo": "^0.16.0"
   },
   "scripts": {
-    "build-uniglyph": "bash script/build-unigroff.sh",
-    "build-md": "remark . --quiet --frail",
-    "build-bundle": "browserify index.js --bare -s remarkMan > remark-man.js",
+    "build-md": "remark *.md --quiet --frail",
+    "build-bundle": "browserify index.js -s remarkMan > remark-man.js",
     "build-mangle": "esmangle remark-man.js > remark-man.min.js",
-    "build": "npm run build-uniglyph && npm run build-md && npm run build-bundle && npm run build-mangle",
-    "lint-api": "eslint .",
-    "lint-style": "jscs --reporter inline .",
-    "lint": "npm run lint-api && npm run lint-style",
-    "test-api": "node test/index.js",
-    "test-coverage": "istanbul cover test/index.js",
+    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
+    "lint": "xo",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test.js",
     "test": "npm run build && npm run lint && npm run test-coverage"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "lines": 100,
+    "functions": 100,
+    "branches": 100
+  },
+  "xo": {
+    "space": true,
+    "rules": {
+      "guard-for-in": "off"
+    },
+    "ignores": [
+      "remark-man.js"
+    ]
+  },
+  "remarkConfig": {
+    "output": true,
+    "presets": "wooorm"
   }
 }

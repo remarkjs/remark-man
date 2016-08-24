@@ -5,20 +5,20 @@
 .P
 .RS 2
 .nf
-var mdast \[eq] require(\[aq]mdast\[aq]);
-var yamlConfig \[eq] require(\[aq]mdast-yaml-config\[aq]);
+var mdast = require('mdast');
+var yamlConfig = require('mdast-yaml-config');
 
-\[sl]\[sl] Use a plugin.  mdast-yaml-config allows settings in YAML frontmatter.
-var processor \[eq] mdast().use(yamlConfig);
+// Use a plugin.  mdast-yaml-config allows settings in YAML frontmatter.
+var processor = mdast().use(yamlConfig);
 
-\[sl]\[sl] Parse, modify, and stringify the document:
-var doc \[eq] processor.process(
-    \[aq]---\[rs]n\[aq] \[pl]
-    \[aq]mdast:\[rs]n\[aq] \[pl]
-    \[aq]  commonmark: true\[rs]n\[aq] \[pl]
-    \[aq]---\[rs]n\[aq] \[pl]
-    \[aq]\[rs]n\[aq] \[pl]
-    \[aq]2) Some *emphasis*, **strongness**, and \[ga]code\[ga].\[rs]n\[aq]
+// Parse, modify, and stringify the document:
+var doc = processor.process(
+    '---\[rs]n' +
+    'mdast:\[rs]n' +
+    '  commonmark: true\[rs]n' +
+    '---\[rs]n' +
+    '\[rs]n' +
+    '2) Some *emphasis*, **strongness**, and `code`.\[rs]n'
 );
 .fi
 .RE
@@ -27,14 +27,14 @@ var doc \[eq] processor.process(
 This is the application programming interface documentation for \fBmdast\fR. To find documentation for the command line interface, see \fBman 1 mdast\fR.
 .SS "mdast.use(plugin, options?)"
 .P
-Change the way \fBmdast\fR functions by using a plugin. Plugins are documented at \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]plugins.md\(ra\fR.
+Change the way \fBmdast\fR functions by using a plugin. Plugins are documented at \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/plugins.md\(ra\fR.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBprocessor \[eq] mdast.use(plugin, options?)\fR;
+\fBprocessor = mdast.use(plugin, options?)\fR;
 .IP \(bu 4
-\fBprocessor \[eq] mdast.use(plugins)\fR.
+\fBprocessor = mdast.use(plugins)\fR.
 .RE 0
 
 .P
@@ -59,7 +59,7 @@ Parse a markdown document into an abstract syntax tree.
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBast \[eq] mdast.parse(file\[ba]value, options?)\fR.
+\fBast = mdast.parse(file|value, options?)\fR.
 .RE 0
 
 .P
@@ -76,7 +76,7 @@ Parse a markdown document into an abstract syntax tree.
 .P
 \fBReturns\fR
 .P
-\fBObject\fR -- Node. Nodes are documented at \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]nodes.md\(ra\fR.
+\fBObject\fR -- Node. Nodes are documented at \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/nodes.md\(ra\fR.
 .SS "mdast.run(ast, file, done?)"
 .P
 Modify an abstract syntax tree by applying plugins to it.
@@ -84,9 +84,9 @@ Modify an abstract syntax tree by applying plugins to it.
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBast \[eq] mdast.run(ast, file\[ba]value?, done?)\fR;
+\fBast = mdast.run(ast, file|value?, done?)\fR;
 .IP \(bu 4
-\fBast \[eq] mdast.run(ast, done?)\fR.
+\fBast = mdast.run(ast, done?)\fR.
 .RE 0
 
 .P
@@ -113,7 +113,7 @@ Compile an abstract syntax tree into a document.
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBdoc \[eq] mdast.stringify(ast, options?)\fR.
+\fBdoc = mdast.stringify(ast, options?)\fR.
 .RE 0
 
 .P
@@ -136,7 +136,7 @@ Parse, modify, and compile a markdown document it into something else.
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBdoc \[eq] mdast.process(file\[ba]value, options?, done?)\fR.
+\fBdoc = mdast.process(file|value, options?, done?)\fR.
 .RE 0
 
 .P
@@ -185,12 +185,12 @@ Invoked when processing is complete.
 \fBstring\fR -- Document. Formatted in markdown by default, or in whatever a plugin generates.
 .SS "File()"
 .P
-File objects make it easy to change the directory, name, or extension of a file: let\[aq]s say multiple markdown files are converted to HTML. Instead of overwriting the markdown sources, file objects make it easy to output files with a different (\fB\[dq]html\[dq]\fR) extension. In addition, files expose the raw source to plugins.
+File objects make it easy to change the directory, name, or extension of a file: let's say multiple markdown files are converted to HTML. Instead of overwriting the markdown sources, file objects make it easy to output files with a different (\fB"html"\fR) extension. In addition, files expose the raw source to plugins.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBfile \[eq] File(file\[ba]value\[ba]options?)\fR.
+\fBfile = File(file|value|options?)\fR.
 .RE 0
 
 .P
@@ -204,13 +204,13 @@ File objects make it easy to change the directory, name, or extension of a file:
 \fBoptions\fR (\fBObject\fR): Parts:
 .RS 4
 .IP \(bu 4
-\fBdirectory\fR (\fBstring\fR, default: \fB\[aq]\[aq]\fR) -- Parent directory;
+\fBdirectory\fR (\fBstring\fR, default: \fB''\fR) -- Parent directory;
 .IP \(bu 4
 \fBfilename\fR (\fBstring?\fR, default: \fBnull\fR) -- Name, without extension;
 .IP \(bu 4
-\fBextension\fR (\fBstring\fR, default: \fB\[aq]md\[aq]\fR) -- Extension, without dot;
+\fBextension\fR (\fBstring\fR, default: \fB'md'\fR) -- Extension, without dot;
 .IP \(bu 4
-\fBcontents\fR (\fBstring\fR, default: \fB\[aq]\[aq]\fR) -- Raw value.
+\fBcontents\fR (\fBstring\fR, default: \fB''\fR) -- Raw value.
 .RE 0
 
 .RE 0
@@ -222,20 +222,20 @@ File objects make it easy to change the directory, name, or extension of a file:
 .P
 \fBNotes\fR
 .P
-\fBFile\fR exposes an interface compatible with ESLint\[aq]s formatters. For example, to expose warnings using ESLint\[aq]s \fBcompact\fR formatter, execute the following:
+\fBFile\fR exposes an interface compatible with ESLint's formatters. For example, to expose warnings using ESLint's \fBcompact\fR formatter, execute the following:
 .P
 .RS 2
 .nf
-var compact \[eq] require(\[aq]eslint\[sl]lib\[sl]formatters\[sl]compact\[aq]);
-var File \[eq] require(\[aq]mdast\[sl]lib\[sl]file\[aq]);
+var compact = require('eslint/lib/formatters/compact');
+var File = require('mdast/lib/file');
 
-var file \[eq] new File(\[lC]
-    \[aq]directory\[aq]: \[aq]\[ti]\[aq],
-    \[aq]filename\[aq]: \[aq]Hello\[aq],
-    \[aq]extension\[aq]: \[aq]markdown\[aq]
-\[rC]);
+var file = new File({
+    'directory': '~',
+    'filename': 'Hello',
+    'extension': 'markdown'
+});
 
-file.warn(\[aq]Woops, something happened!\[aq]);
+file.warn('Woops, something happened!');
 
 console.log(compact(\[lB]file\[rB]));
 .fi
@@ -245,26 +245,26 @@ Which would yield the following:
 .P
 .RS 2
 .nf
-\[ti]\[sl]Hello.markdown: line 0, col 0, Warning - Woops, something happened!
+~/Hello.markdown: line 0, col 0, Warning - Woops, something happened!
 
 1 problem
 .fi
 .RE
-.SS "File\[sh]toString()"
+.SS "File#toString()"
 .P
 Getter for internal \fBcontents\fR property.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBvalue \[eq] file.toString()\fR.
+\fBvalue = file.toString()\fR.
 .RE 0
 
 .P
 \fBReturns\fR
 .P
 \fBstring\fR -- Contents.
-.SS "File\[sh]messages"
+.SS "File#messages"
 .P
 A list of warnings and errors associated with the file.
 .P
@@ -290,29 +290,29 @@ Where \fBMessage\fR has the following properties:
 .P
 \fBNotes\fR
 .P
-\fBFile\[sh]exception()\fR, and in turn \fBFile\[sh]warn()\fR and \fBFile\[sh]fail()\fR, return \fBError\fR objects that comply with this schema. Its results can be added to \fBmessages\fR.
-.SS "File\[sh]hasFailed()"
+\fBFile#exception()\fR, and in turn \fBFile#warn()\fR and \fBFile#fail()\fR, return \fBError\fR objects that comply with this schema. Its results can be added to \fBmessages\fR.
+.SS "File#hasFailed()"
 .P
 Check if a fatal exception occurred making the file no longer processable.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBhasFailed \[eq] file.hasFailed()\fR.
+\fBhasFailed = file.hasFailed()\fR.
 .RE 0
 
 .P
 \fBReturns\fR
 .P
 \fBboolean\fR -- \fBtrue\fR if at least one of \fBfile\fRs \fBmessage\fRs has a \fBfatal\fR property set to \fBtrue\fR.
-.SS "File\[sh]exception(reason, position?)"
+.SS "File#exception(reason, position?)"
 .P
 Create an error.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBerr \[eq] file.exception(err\[ba]reason, node\[ba]location\[ba]position?)\fR.
+\fBerr = file.exception(err|reason, node|location|position?)\fR.
 .RE 0
 
 .P
@@ -347,48 +347,48 @@ This object has the following properties:
 \fBcolumn\fR (\fBnumber\fR) -- Starting column of exception.
 .RE 0
 
-.SS "File\[sh]warn(reason, position?)"
+.SS "File#warn(reason, position?)"
 .P
-Creates an exception by passing its arguments to \fBFile\[sh]exception()\fR, sets \fBfatal: false\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
-.P
-\fBSee\fR
-.RS 0
-.IP \(bu 4
-\fBFile\[sh]exception(reason, position?)\fR
-.RE 0
-
-.SS "File\[sh]fail(reason, position?)"
-.P
-Creates an exception by passing its arguments to \fBFile\[sh]exception()\fR, sets \fBfatal: true\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
-.P
-If \fBfile\fR has a falsey \fBquiet\fR property, \fBFile\[sh]fail()\fR throws the exception.
+Creates an exception by passing its arguments to \fBFile#exception()\fR, sets \fBfatal: false\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
 .P
 \fBSee\fR
 .RS 0
 .IP \(bu 4
-\fBFile\[sh]exception(reason, position?)\fR
+\fBFile#exception(reason, position?)\fR
 .RE 0
 
-.SS "File\[sh]filePath()"
+.SS "File#fail(reason, position?)"
+.P
+Creates an exception by passing its arguments to \fBFile#exception()\fR, sets \fBfatal: true\fR on it, and adds it to \fBfile\fRs \fBmessages\fR. Then, it returns the exception.
+.P
+If \fBfile\fR has a falsey \fBquiet\fR property, \fBFile#fail()\fR throws the exception.
+.P
+\fBSee\fR
+.RS 0
+.IP \(bu 4
+\fBFile#exception(reason, position?)\fR
+.RE 0
+
+.SS "File#filePath()"
 .P
 Get the filename, with extension and directory, if applicable.
 .P
 \fBSignatures\fR
 .RS 0
 .IP \(bu 4
-\fBfilename? \[eq] file.filePath()\fR.
+\fBfilename? = file.filePath()\fR.
 .RE 0
 
 .P
 \fBReturns\fR
 .P
-\fBstring\fR -- If the \fBfile\fR has a \fBfilename\fR, it will be prefixed with the directory (slashed), if applicable, and su\[Fi]xed with the (dotted) extension (if applicable). Otherwise, an empty string is returned.
+\fBstring\fR -- If the \fBfile\fR has a \fBfilename\fR, it will be prefixed with the directory (slashed), if applicable, and suffixed with the (dotted) extension (if applicable). Otherwise, an empty string is returned.
 .SH "BUGS"
 .P
-\fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]issues\(ra\fR
+\fI\(lahttps://github.com/wooorm/mdast/issues\(ra\fR
 .SH "SEE ALSO"
 .P
 \fBmdast\fR(1), \fBmdastconfig\fR(7).
 .SH "AUTHOR"
 .P
-Written by Titus Wormer \fI\(latituswormer\[at]gmail.com\(ra\fR
+Written by Titus Wormer \fI\(latituswormer@gmail.com\(ra\fR

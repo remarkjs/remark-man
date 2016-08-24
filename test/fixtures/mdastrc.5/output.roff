@@ -8,7 +8,7 @@
 .P
 \fBmdast\fR gets its configuration from the command line and \fBmdastrc\fR files.
 .P
-For a list of available configuration options, see \fBmdast\fR(1) or \fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]blob\[sl]master\[sl]doc\[sl]options.md\(ra\fR.
+For a list of available configuration options, see \fBmdast\fR(1) or \fI\(lahttps://github.com/wooorm/mdast/blob/master/doc/options.md\(ra\fR.
 .SH "FILES"
 .P
 All \fBmdastrc\fR(5) configuration files are in JSON.
@@ -19,12 +19,12 @@ Automatically detected files named \fBpackage.json\fR use the \fBmdastConfig\fR 
 .P
 .RS 2
 .nf
-\[lC]
-  \[dq]settings\[dq]: \[lC]
-    \[dq]commonmark\[dq]: true,
-    \[dq]bullet\[dq]: \[dq]*\[dq]
-  \[rC]
-\[rC]
+{
+  "settings": {
+    "commonmark": true,
+    "bullet": "*"
+  }
+}
 .fi
 .RE
 .P
@@ -35,11 +35,11 @@ List:
 .P
 .RS 2
 .nf
-\[lC]
-  \[dq]plugins\[dq]: \[lB]
-    \[dq]toc\[dq]
+{
+  "plugins": \[lB]
+    "toc"
   \[rB]
-\[rC]
+}
 .fi
 .RE
 .P
@@ -47,13 +47,13 @@ Options:
 .P
 .RS 2
 .nf
-\[lC]
-  \[dq]plugins\[dq]: \[lC]
-    \[dq]github\[dq]: \[lC]
-      \[dq]repository\[dq]: \[dq]foo\[sl]bar\[dq]
-    \[rC]
-  \[rC]
-\[rC]
+{
+  "plugins": {
+    "github": {
+      "repository": "foo/bar"
+    }
+  }
+}
 .fi
 .RE
 .P
@@ -71,7 +71,7 @@ Files passed to \fBmdast\fR(1);
 .IP \(bu 4
 Files named \fB.mdastrc\fR and \fBmdastConfig\fR fields in \fBpackage.json\fR in the directory of the processed file, and in ancestral directories;
 .IP \(bu 4
-If no \fB.mdastrc\fR and \fBpackage.json\fR were detected in the directory of the file or its ancestral directories, a per-user config file (\fB\[ti]\[sl].mdastrc\fR) is used;
+If no \fB.mdastrc\fR and \fBpackage.json\fR were detected in the directory of the file or its ancestral directories, a per-user config file (\fB~/.mdastrc\fR) is used;
 .RE 0
 
 .P
@@ -82,25 +82,25 @@ For example, for the following project:
 .RS 2
 .nf
 project
-\[ba]-- docs
-\[ba]   \[ba]-- .mdastrc
-\[ba]   \[ba]-- doc.md
-\[ba]
-\[ba]-- .mdastrc
-\[ba]-- package.json
-\[ba]-- readme.md
+|-- docs
+|   |-- .mdastrc
+|   |-- doc.md
+|
+|-- .mdastrc
+|-- package.json
+|-- readme.md
 .fi
 .RE
 .P
-Where \fBdocs\[sl].mdastrc\fR looks as follows:
+Where \fBdocs/.mdastrc\fR looks as follows:
 .P
 .RS 2
 .nf
-\[lC]
-    \[dq]settings\[dq]: \[lC]
-        \[dq]bullet\[dq]: \[dq]\[pl]\[dq]
-    \[rC]
-\[rC]
+{
+    "settings": {
+        "bullet": "+"
+    }
+}
 .fi
 .RE
 .P
@@ -108,13 +108,13 @@ And \fBpackage.json\fR contains:
 .P
 .RS 2
 .nf
-\[lC]
-    \[dq]mdastConfig\[dq]: \[lC]
-        \[dq]settings\[dq]: \[lC]
-            \[dq]bullet\[dq]: \[dq]*\[dq]
-        \[rC]
-    \[rC]
-\[rC]
+{
+    "mdastConfig": {
+        "settings": {
+            "bullet": "*"
+        }
+    }
+}
 .fi
 .RE
 .P
@@ -122,23 +122,23 @@ And \fB.mdastrc\fR contains:
 .P
 .RS 2
 .nf
-\[lC]
-    \[dq]settings\[dq]: \[lC]
-        \[dq]bullet\[dq]: \[dq]-\[dq]
-    \[rC]
-\[rC]
+{
+    "settings": {
+        "bullet": "-"
+    }
+}
 .fi
 .RE
 .P
-Then, when stringifying \fBdocs\[sl]doc.md\fR, \fBmdast\fR(1) would use \fBbullet: \[dq]\[pl]\[dq]\fR because \fBdocs\[sl].mdastrc\fR takes precedence over \fB.mdastrc\fR and \fBpackage.json\fR.
+Then, when stringifying \fBdocs/doc.md\fR, \fBmdast\fR(1) would use \fBbullet: "+"\fR because \fBdocs/.mdastrc\fR takes precedence over \fB.mdastrc\fR and \fBpackage.json\fR.
 .P
-When stringifying \fBreadme.md\fR, \fBmdast\fR(1) would use \fBbullet: \[dq]-\[dq]\fR, because \fB.mdastrc\fR takes precedence over \fBpackage.json\fR.
+When stringifying \fBreadme.md\fR, \fBmdast\fR(1) would use \fBbullet: "-"\fR, because \fB.mdastrc\fR takes precedence over \fBpackage.json\fR.
 .SH "BUGS"
 .P
-\fI\(lahttps:\[sl]\[sl]github.com\[sl]wooorm\[sl]mdast\[sl]issues\(ra\fR
+\fI\(lahttps://github.com/wooorm/mdast/issues\(ra\fR
 .SH "SEE ALSO"
 .P
 \fBmdast\fR(1), \fBmdastignore\fR(5), \fBmdastconfig\fR(7).
 .SH "AUTHOR"
 .P
-Written by Titus Wormer \fI\(latituswormer\[at]gmail.com\(ra\fR
+Written by Titus Wormer \fI\(latituswormer@gmail.com\(ra\fR
