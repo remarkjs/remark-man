@@ -1,14 +1,5 @@
-/**
- * @author Titus Wormer
- * @copyright 2015 Titus Wormer
- * @license MIT
- * @module remark:man:test
- * @fileoverview Tests.
- */
-
 'use strict';
 
-/* Dependencies. */
 var path = require('path');
 var fs = require('fs');
 var test = require('tape');
@@ -18,18 +9,14 @@ var hidden = require('is-hidden');
 var not = require('negate');
 var man = require('..');
 
-/* Methods. */
 var read = fs.readFileSync;
 var exists = fs.existsSync;
 var join = path.join;
 
-/* Constants. */
 var ROOT = join(__dirname, 'fixtures');
 
-/* Fixtures. */
 var fixtures = fs.readdirSync(ROOT).filter(not(hidden));
 
-/* Shortcut to process. */
 function process(file, config) {
   return remark().use(man, config).process(file, {footnotes: true}).toString();
 }
@@ -46,7 +33,6 @@ test.onFinish(function () {
   global.Date = ODate;
 });
 
-/* Tests. */
 test('remark-man()', function (t) {
   t.equal(typeof man, 'function', 'should be a function');
 
@@ -65,7 +51,6 @@ test('remark-man()', function (t) {
   t.end();
 });
 
-/* Fixtures. */
 test('Fixtures', function (t) {
   fixtures.forEach(function (fixture) {
     var filepath = join(ROOT, fixture);
