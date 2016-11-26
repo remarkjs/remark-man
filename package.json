@@ -17,9 +17,6 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
   ],
-  "engines": {
-    "node": ">=0.11.0"
-  },
   "dependencies": {
     "github-slugger": "^1.1.1",
     "groff-escape": "^1.0.0",
