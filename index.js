@@ -4,6 +4,6 @@ var compiler = require('./lib/compiler.js');
 
 module.exports = man;
 
-function man(remark, options) {
-  remark.Compiler = compiler(options || {});
+function man(options) {
+  this.Compiler = compiler(options || {});
 }

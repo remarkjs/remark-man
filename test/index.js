@@ -18,7 +18,11 @@ var ROOT = join(__dirname, 'fixtures');
 var fixtures = fs.readdirSync(ROOT).filter(not(hidden));
 
 function process(file, config) {
-  return remark().use(man, config).process(file, {footnotes: true}).toString();
+  return remark()
+    .data('settings', {footnotes: true})
+    .use(man, config)
+    .processSync(file)
+    .toString();
 }
 
 /* Hack so the tests don’t need updating everytime... */
@@ -37,7 +41,7 @@ test('remark-man()', function (t) {
   t.equal(typeof man, 'function', 'should be a function');
 
   t.doesNotThrow(function () {
-    man(remark());
+    man.call(remark());
   }, 'should not throw if not passed options');
 
   t.equal(
