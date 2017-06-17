@@ -63,12 +63,12 @@ Compile markdown to a man page.
 
 ###### `options`
 
-*   `name` (`string`, optional);
-*   `section` (`number` or `string`, optional);
-*   `description` (`string`, optional);
-*   `date` (given to `new Date()`, optional);
-*   `version` (`string`, optional);
-*   `manual` (`string`, optional).
+*   `name` (`string`, optional)
+*   `section` (`number` or `string`, optional)
+*   `description` (`string`, optional)
+*   `date` (given to `new Date()`, optional)
+*   `version` (`string`, optional)
+*   `manual` (`string`, optional)
 
 The **name** and **section** can also be inferred from the file’s name:
 `hello-world.1.md` will set `name` to `"hello-world"` and `section` to
