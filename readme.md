@@ -86,6 +86,17 @@ The following file:
 The main heading has precedence over the file name, and the file name
 over the plugin settings.
 
+## Related
+
+*   [`remark-react`](https://github.com/mapbox/remark-react)
+    — Compile to React
+*   [`remark-vdom`](https://github.com/wooorm/remark-vdom)
+    — Compile to VDOM
+*   [`remark-html`](https://github.com/wooorm/remark-html)
+    — Compile to HTML
+*   [`remark-rehype`](https://github.com/wooorm/remark-rehype)
+    — Properly transform to HTML
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
