@@ -14,49 +14,48 @@ npm install remark-man
 
 ## Usage
 
-## Command line
+Say we have the following file, `example.md`:
 
-![Example how remark-man looks on screen][screenshot]
-
-Use `remark-man` together with [`remark-cli`][cli]:
-
-```bash
-npm install --global remark-cli remark-man
-```
-
-Let’s say `example.md` looks as follows:
-
-```md
+```markdown
 # ls(1) -- list directory contents
 
 ## SYNOPSIS
 
-`ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`\] \[_file_ _..._\]
+`ls` [`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`] \[_file_ _..._]
 ```
 
-Now, running `remark example.md --use man --output` yields a new
-file, `example.1`:
+And our script, `example.js`, looks as follows:
+
+```javascript
+var vfile = require('to-vfile');
+var unified = require('unified');
+var markdown = require('remark-parse');
+var man = require('remark-man');
+
+unified()
+  .use(markdown)
+  .use(man)
+  .process(vfile.readSync('example.md'), function (err, file) {
+    if (err) throw err;
+    file.extname = '.1';
+    vfile.writeSync(file);
+  });
+```
+
+Now, running `node example` and `cat example.1` yields:
 
 ```roff
-.TH "LS" "1" "February 2016" "" ""
+.TH "LS" "1" "June 2015" "" ""
 .SH "NAME"
 \fBls\fR - list directory contents
 .SH "SYNOPSIS"
 .P
-\fBls\fR \[lB]\fB-ABCFGHLOPRSTUW\[at]abcdefghiklmnopqrstuwx1\fR\[rB] \[lB]\fIfile\fR \fI...\fR\[rB]
+\fBls\fR \fB\fB-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1\fR\fR \[lB]\fIfile\fR \fI...\fR\[rB]
 ```
 
 Now, that looks horrible, but that’s how roff/groff/troff are :wink:.
 
 To properly view that man page, use something like this: `man ./example.1`.
-
-## API
-
-Use `remark-man` together with [`remark`][api]:
-
-```sh
-npm install remark remark-man --save
-```
 
 ### `remark.use(man[, options])`
 
@@ -113,9 +112,3 @@ over the plugin settings.
 [npm]: https://docs.npmjs.com/cli/install
 
 [remark]: https://github.com/wooorm/remark
-
-[api]: https://github.com/wooorm/remark/tree/master/packages/remark
-
-[cli]: https://github.com/wooorm/remark/tree/master/packages/remark-cli
-
-[screenshot]: https://cdn.rawgit.com/wooorm/remark-man/master/screenshot.png
