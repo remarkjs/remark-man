@@ -70,19 +70,18 @@ Compile markdown to a man page.
 *   `version` (`string`, optional)
 *   `manual` (`string`, optional)
 
-The **name** and **section** can also be inferred from the file’s name:
-`hello-world.1.md` will set `name` to `"hello-world"` and `section` to
-`"1"`.
+`name` and `section` can also be inferred from the file’s name:
+`hello-world.1.md` will set `name` to `'hello-world'` and `section` to `'1'`.
 
-In addition, you can also provide inline configuration with a main
-heading.  The following file:
+In addition, you can also provide inline configuration with a main heading.
+The following file:
 
 ```md
 # hello-world(7) -- Two common words
 ```
 
-...will set `name` to `"hello-world"`, `section` to `"7"`, and
-`description` to `"Two common words"`.
+...will set `name` to `'hello-world'`, `section` to `'7'`, and `description` to
+`'Two common words'`.
 
 The main heading has precedence over the file name, and the file name
 over the plugin settings.
