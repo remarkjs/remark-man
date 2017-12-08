@@ -97,6 +97,13 @@ over the plugin settings.
 *   [`remark-rehype`](https://github.com/remarkjs/remark-rehype)
     — Properly transform to HTML
 
+## Contribute
+
+See [`contribute.md` in `remarkjs/remarkj`][contribute] for ways to get started.
+
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
+
 ## License
 
 [MIT][license] © [Titus Wormer][author]
@@ -122,3 +129,7 @@ over the plugin settings.
 [npm]: https://docs.npmjs.com/cli/install
 
 [remark]: https://github.com/remarkjs/remark
+
+[contribute]: https://github.com/remarkjs/remark/blob/master/contributing.md
+
+[coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md
