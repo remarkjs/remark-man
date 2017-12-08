@@ -22,7 +22,7 @@
     "groff-escape": "^1.0.0",
     "mapz": "^1.0.0",
     "mdast-util-to-string": "^1.0.0",
-    "months": "^1.0.1",
+    "months": "^2.0.0",
     "unist-util-visit": "^1.0.0",
     "zwitch": "^1.0.0"
   },
