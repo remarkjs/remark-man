@@ -11,8 +11,8 @@
     "ronn",
     "remark"
   ],
-  "repository": "https://github.com/wooorm/remark-man",
-  "bugs": "https://github.com/wooorm/remark-man/issues",
+  "repository": "remarkjs/remark-man",
+  "bugs": "https://github.com/remarkjs/remark-man/issues",
   "author": "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)",
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"

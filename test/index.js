@@ -29,7 +29,7 @@ function process(file, config) {
 var ODate = global.Date;
 
 global.Date = function (val) {
-  /* Timestamp: of https://github.com/wooorm/remark-man/commit/53d7fd7 */
+  /* Timestamp: of https://github.com/remarkjs/remark-man/commit/53d7fd7 */
   return new ODate(val || 1454861068000);
 };
 

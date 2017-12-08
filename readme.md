@@ -90,11 +90,11 @@ over the plugin settings.
 
 *   [`remark-react`](https://github.com/mapbox/remark-react)
     — Compile to React
-*   [`remark-vdom`](https://github.com/wooorm/remark-vdom)
+*   [`remark-vdom`](https://github.com/remarkjs/remark-vdom)
     — Compile to VDOM
-*   [`remark-html`](https://github.com/wooorm/remark-html)
+*   [`remark-html`](https://github.com/remarkjs/remark-html)
     — Compile to HTML
-*   [`remark-rehype`](https://github.com/wooorm/remark-rehype)
+*   [`remark-rehype`](https://github.com/remarkjs/remark-rehype)
     — Properly transform to HTML
 
 ## License
@@ -103,17 +103,17 @@ over the plugin settings.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/wooorm/remark-man.svg
+[build-badge]: https://img.shields.io/travis/remarkjs/remark-man.svg
 
-[build-status]: https://travis-ci.org/wooorm/remark-man
+[build-status]: https://travis-ci.org/remarkjs/remark-man
 
-[coverage-badge]: https://img.shields.io/codecov/c/github/wooorm/remark-man.svg
+[coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/remark-man.svg
 
-[coverage-status]: https://codecov.io/github/wooorm/remark-man
+[coverage-status]: https://codecov.io/github/remarkjs/remark-man
 
-[chat-badge]: https://img.shields.io/gitter/room/wooorm/remark.svg
+[chat-badge]: https://img.shields.io/gitter/room/remarkjs/Lobby.svg
 
-[chat]: https://gitter.im/wooorm/remark
+[chat]: https://gitter.im/remarkjs/Lobby
 
 [license]: LICENSE
 
@@ -121,4 +121,4 @@ over the plugin settings.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[remark]: https://github.com/wooorm/remark
+[remark]: https://github.com/remarkjs/remark
