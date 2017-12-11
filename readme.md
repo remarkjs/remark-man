@@ -99,6 +99,11 @@ right on odd pages if double-sided printing is active).
 `string`, optional — Manual of page.  Manuals are centred in the header line of
 the displayed page.
 
+###### `commonmark`
+
+Set to `true` (default: `false`) to prefer the first when duplicate definitions
+are found.  The default behaviour is to prefer the last duplicate definition.
+
 ## Related
 
 *   [`remark-react`](https://github.com/mapbox/remark-react)

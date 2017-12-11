@@ -25,6 +25,7 @@
     "github-slugger": "^1.1.1",
     "groff-escape": "^1.0.0",
     "mapz": "^1.0.0",
+    "mdast-util-definitions": "^1.2.2",
     "mdast-util-to-string": "^1.0.0",
     "months": "^2.0.0",
     "unist-util-visit": "^1.0.0",
