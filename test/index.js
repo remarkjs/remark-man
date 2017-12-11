@@ -1,9 +1,12 @@
 'use strict';
 
-var path = require('path');
 var fs = require('fs');
+var path = require('path');
 var test = require('tape');
-var remark = require('remark');
+var unified = require('unified');
+var parse = require('remark-parse');
+var stringify = require('remark-stringify');
+var frontmatter = require('remark-frontmatter');
 var vfile = require('vfile');
 var hidden = require('is-hidden');
 var not = require('negate');
@@ -18,8 +21,10 @@ var ROOT = join(__dirname, 'fixtures');
 var fixtures = fs.readdirSync(ROOT).filter(not(hidden));
 
 function process(file, config) {
-  return remark()
-    .data('settings', {footnotes: true})
+  return unified()
+    .use(parse, {footnotes: true})
+    .use(stringify)
+    .use(frontmatter)
     .use(man, config)
     .processSync(file)
     .toString();
@@ -41,7 +46,7 @@ test('remark-man()', function (t) {
   t.equal(typeof man, 'function', 'should be a function');
 
   t.doesNotThrow(function () {
-    man.call(remark());
+    man.call(unified().use(man).freeze());
   }, 'should not throw if not passed options');
 
   t.equal(

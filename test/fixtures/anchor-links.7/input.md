@@ -2,6 +2,6 @@
 
 [Read more](#bugs).
 
-[Read more](#see also).
+[Read more](#see-also).
 
 # BUGS
