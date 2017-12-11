@@ -61,30 +61,43 @@ To properly view that man page, use something like this: `man ./example.1`.
 
 Compile markdown to a man page.
 
-###### `options`
+##### Options
 
-*   `name` (`string`, optional)
-*   `section` (`number` or `string`, optional)
-*   `description` (`string`, optional)
-*   `date` (given to `new Date()`, optional)
-*   `version` (`string`, optional)
-*   `manual` (`string`, optional)
+###### `name`
 
-`name` and `section` can also be inferred from the file’s name:
-`hello-world.1.md` will set `name` to `'hello-world'` and `section` to `'1'`.
+`string`, optional — Title of the page.
+Is inferred from the main heading: `# hello-world(7)` sets `name` to
+`'hello-world'`; or from the file’s name: `hello-world.1.md` sets `name` to
+`'hello-world'`.
 
-In addition, you can also provide inline configuration with a main heading.
-The following file:
+###### `section`
 
-```md
-# hello-world(7) -- Two common words
-```
+`number` or `string`, optional — [Section][man-section] of page.
+Is inferred from the main heading: `# hello-world(7)` sets `section` to
+`7`; or from the file’s name: `hello-world.1.md` sets `section` to `1`.
 
-...will set `name` to `'hello-world'`, `section` to `'7'`, and `description` to
-`'Two common words'`.
+###### `description`
 
-The main heading has precedence over the file name, and the file name
-over the plugin settings.
+`string`, optional — Description of page.
+Is inferred from the main heading: `# hello-world(7) -- Two common words` sets
+`description` to `'Two common words'`.
+
+###### `date`
+
+`number`, `string`, or `Date`, optional — Date of page.  Given to
+`new Date(date)` as `date`, so when `null` or `undefined`, defaults to the
+current date.  Dates are centred in the footer line of the displayed page.
+
+###### `version`
+
+`string`, optional — Version of page.  Versions are positioned at the left of
+the footer line of the displayed page (or at the left on even pages and at the
+right on odd pages if double-sided printing is active).
+
+###### `manual`
+
+`string`, optional — Manual of page.  Manuals are centred in the header line of
+the displayed page.
 
 ## Related
 
@@ -99,7 +112,7 @@ over the plugin settings.
 
 ## Contribute
 
-See [`contribute.md` in `remarkjs/remarkj`][contribute] for ways to get started.
+See [`contribute.md` in `remarkjs/remark`][contribute] for ways to get started.
 
 This organisation has a [Code of Conduct][coc].  By interacting with this
 repository, organisation, or community you agree to abide by its terms.
@@ -133,3 +146,5 @@ repository, organisation, or community you agree to abide by its terms.
 [contribute]: https://github.com/remarkjs/remark/blob/master/contributing.md
 
 [coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md
+
+[man-section]: https://en.wikipedia.org/wiki/Man_page#Manual_sections
