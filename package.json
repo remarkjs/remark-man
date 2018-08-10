@@ -36,6 +36,7 @@
     "is-hidden": "^1.0.1",
     "negate": "^1.0.0",
     "nyc": "^12.0.0",
+    "prettier": "^1.14.2",
     "remark-cli": "^5.0.0",
     "remark-frontmatter": "^1.2.0",
     "remark-parse": "^5.0.0",
@@ -48,14 +49,13 @@
     "xo": "^0.22.0"
   },
   "scripts": {
-    "build-md": "remark *.md -qfo",
+    "format": "remark *..md -qfo && prettier --write \"**/*.js\" && xo --fix",
     "build-bundle": "browserify . -s remarkMan > remark-man.js",
     "build-mangle": "browserify . -s remarkMan -p tinyify > remark-man.min.js",
-    "build": "npm run build-md && npm run build-bundle && npm run build-mangle",
-    "lint": "xo",
+    "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test.js",
-    "test": "npm run build && npm run lint && npm run test-coverage"
+    "test": "npm run format && npm run build && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,
@@ -63,11 +63,20 @@
     "functions": 100,
     "branches": 100
   },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "semi": false,
+    "trailingComma": "none"
+  },
   "xo": {
-    "space": true,
+    "prettier": true,
     "esnext": false,
     "rules": {
-      "guard-for-in": "off"
+      "guard-for-in": "off",
+      "complexity": "off"
     },
     "ignores": [
       "remark-man.js"

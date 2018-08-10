@@ -27,19 +27,19 @@ Say we have the following file, `example.md`:
 And our script, `example.js`, looks as follows:
 
 ```javascript
-var vfile = require('to-vfile');
-var unified = require('unified');
-var markdown = require('remark-parse');
-var man = require('remark-man');
+var vfile = require('to-vfile')
+var unified = require('unified')
+var markdown = require('remark-parse')
+var man = require('remark-man')
 
 unified()
   .use(markdown)
   .use(man)
-  .process(vfile.readSync('example.md'), function (err, file) {
-    if (err) throw err;
-    file.extname = '.1';
-    vfile.writeSync(file);
-  });
+  .process(vfile.readSync('example.md'), function(err, file) {
+    if (err) throw err
+    file.extname = '.1'
+    vfile.writeSync(file)
+  })
 ```
 
 Now, running `node example` and `cat example.1` yields:

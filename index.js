@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-var compiler = require('./lib/compiler.js');
+var compiler = require('./lib/compiler.js')
 
-module.exports = man;
+module.exports = man
 
 function man(options) {
-  this.Compiler = compiler(options || {});
+  this.Compiler = compiler(options || {})
 }
