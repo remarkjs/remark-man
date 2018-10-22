@@ -71,7 +71,7 @@ test('Fixtures', function(t) {
 
     try {
       config = JSON.parse(read(join(filepath, 'config.json'), 'utf8'))
-    } catch (err) {
+    } catch (error) {
       config = {}
     }
 
