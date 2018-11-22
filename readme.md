@@ -1,4 +1,11 @@
-# remark-man [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
+# remark-man
+
+[![Build][build-badge]][build]
+[![Coverage][coverage-badge]][coverage]
+[![Downloads][downloads-badge]][downloads]
+[![Chat][chat-badge]][chat]
+[![Sponsors][sponsors-badge]][collective]
+[![Backers][backers-badge]][collective]
 
 Compile markdown to man pages with [**remark**][remark].  Great unicode
 support; name, section, and description detection; nested block quotes
@@ -131,15 +138,25 @@ repository, organisation, or community you agree to abide by its terms.
 
 [build-badge]: https://img.shields.io/travis/remarkjs/remark-man.svg
 
-[build-status]: https://travis-ci.org/remarkjs/remark-man
+[build]: https://travis-ci.org/remarkjs/remark-man
 
 [coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/remark-man.svg
 
-[coverage-status]: https://codecov.io/github/remarkjs/remark-man
+[coverage]: https://codecov.io/github/remarkjs/remark-man
 
-[chat-badge]: https://img.shields.io/gitter/room/remarkjs/Lobby.svg
+[downloads-badge]: https://img.shields.io/npm/dm/remark-man.svg
 
-[chat]: https://gitter.im/remarkjs/Lobby
+[downloads]: https://www.npmjs.com/package/remark-man
+
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/remark
+
+[sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
+
+[backers-badge]: https://opencollective.com/unified/backers/badge.svg
+
+[collective]: https://opencollective.com/unified
 
 [license]: license
 
