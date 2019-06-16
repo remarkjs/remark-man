@@ -3,23 +3,28 @@
 [![Build][build-badge]][build]
 [![Coverage][coverage-badge]][coverage]
 [![Downloads][downloads-badge]][downloads]
-[![Chat][chat-badge]][chat]
+[![Size][size-badge]][size]
 [![Sponsors][sponsors-badge]][collective]
 [![Backers][backers-badge]][collective]
+[![Chat][chat-badge]][chat]
 
-Compile markdown to man pages with [**remark**][remark].  Great unicode
-support; name, section, and description detection; nested block quotes
-and lists; tables; and much more.
+[**remark**][remark] plugin to compile Markdown to man pages.
 
-## Installation
+*   [x] Great unicode support
+*   [x] Name, section, and description detection
+*   [x] Nested block quotes and lists
+*   [x] Tables
+*   [x] and much more
+
+## Install
 
 [npm][]:
 
-```bash
+```sh
 npm install remark-man
 ```
 
-## Usage
+## Use
 
 Say we have the following file, `example.md`:
 
@@ -33,7 +38,7 @@ Say we have the following file, `example.md`:
 
 And our script, `example.js`, looks as follows:
 
-```javascript
+```js
 var vfile = require('to-vfile')
 var unified = require('unified')
 var markdown = require('remark-parse')
@@ -60,60 +65,63 @@ Now, running `node example` and `cat example.1` yields:
 \fBls\fR \fB\fB-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1\fR\fR \[lB]\fIfile\fR \fI...\fR\[rB]
 ```
 
-Now, that looks horrible, but that’s how roff/groff/troff are :wink:.
+Now, that looks horrible, but that’s how roff/groff/troff are.  😉
 
 To properly view that man page, use something like this: `man ./example.1`.
 
-### `remark.use(man[, options])`
+### `remark().use(man[, options])`
 
-Compile markdown to a man page.
+Plugin to compile Markdown to man pages.
 
-##### Options
+##### `options`
 
-###### `name`
+###### `options.name`
 
-`string`, optional — Title of the page.
-Is inferred from the main heading: `# hello-world(7)` sets `name` to
-`'hello-world'`; or from the file’s name: `hello-world.1.md` sets `name` to
-`'hello-world'`.
+Title of the page (`string`, optional).
+Is inferred from the main heading (`# hello-world(7)` sets `name` to
+`'hello-world'`) or from the file’s name (`hello-world.1.md` sets `name` to
+`'hello-world'`).
 
-###### `section`
+###### `options.section`
 
-`number` or `string`, optional — [Section][man-section] of page.
-Is inferred from the main heading: `# hello-world(7)` sets `section` to
-`7`; or from the file’s name: `hello-world.1.md` sets `section` to `1`.
+[Section][man-section] of page (`number` or `string`, optional).
+Is inferred from the main heading (`# hello-world(7)` sets `section` to `7`) or
+from the file’s name (`hello-world.1.md` sets `section` to `1`).
 
-###### `description`
+###### `options.description`
 
-`string`, optional — Description of page.
-Is inferred from the main heading: `# hello-world(7) -- Two common words` sets
-`description` to `'Two common words'`.
+Description of page (`string`, optional).
+Is inferred from the main heading (`# hello-world(7) -- Two common words` sets
+`description` to `'Two common words'`).
 
-###### `date`
+###### `options.date`
 
-`number`, `string`, or `Date`, optional — Date of page.  Given to
-`new Date(date)` as `date`, so when `null` or `undefined`, defaults to the
-current date.  Dates are centred in the footer line of the displayed page.
+Date of page (`number`, `string`, or `Date`, optional).
+Given to `new Date(date)` as `date`, so when `null` or `undefined`, defaults to
+the current date.
+Dates are centred in the footer line of the displayed page.
 
-###### `version`
+###### `options.version`
 
-`string`, optional — Version of page.  Versions are positioned at the left of
-the footer line of the displayed page (or at the left on even pages and at the
-right on odd pages if double-sided printing is active).
+Version of page (`string`, optional).
+Versions are positioned at the left of the footer line of the displayed page
+(or at the left on even pages and at the right on odd pages if double-sided
+printing is active).
 
-###### `manual`
+###### `options.manual`
 
-`string`, optional — Manual of page.  Manuals are centred in the header line of
-the displayed page.
+Manual of page (`string`, optional).
+Manuals are centred in the header line of the displayed page.
 
-###### `commonmark`
+###### `options.commonmark`
 
-Set to `true` (default: `false`) to prefer the first when duplicate definitions
-are found.  The default behaviour is to prefer the last duplicate definition.
+Parsing mode (`boolean`, default: `false`).
+The default behaviour is to prefer the last duplicate definition.
+Set to `true` to prefer the first when duplicate definitions are found.
 
 ## Related
 
-*   [`remark-react`](https://github.com/mapbox/remark-react)
+*   [`remark-react`](https://github.com/remarkjs/remark-react)
     — Compile to React
 *   [`remark-vdom`](https://github.com/remarkjs/remark-vdom)
     — Compile to VDOM
@@ -124,11 +132,13 @@ are found.  The default behaviour is to prefer the last duplicate definition.
 
 ## Contribute
 
-See [`contributing.md` in `remarkjs/remark`][contributing] for ways to get
-started.
+See [`contributing.md`][contributing] in [`remarkjs/.github`][health] for ways
+to get started.
+See [`support.md`][support] for ways to get help.
 
-This organisation has a [Code of Conduct][coc].  By interacting with this
-repository, organisation, or community you agree to abide by its terms.
+This project has a [Code of Conduct][coc].
+By interacting with this repository, organisation, or community you agree to
+abide by its terms.
 
 ## License
 
@@ -136,7 +146,7 @@ repository, organisation, or community you agree to abide by its terms.
 
 <!-- Definitions -->
 
-[build-badge]: https://img.shields.io/travis/remarkjs/remark-man.svg
+[build-badge]: https://img.shields.io/travis/remarkjs/remark-man/master.svg
 
 [build]: https://travis-ci.org/remarkjs/remark-man
 
@@ -148,9 +158,9 @@ repository, organisation, or community you agree to abide by its terms.
 
 [downloads]: https://www.npmjs.com/package/remark-man
 
-[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+[size-badge]: https://img.shields.io/bundlephobia/minzip/remark-man.svg
 
-[chat]: https://spectrum.chat/unified/remark
+[size]: https://bundlephobia.com/result?p=remark-man
 
 [sponsors-badge]: https://opencollective.com/unified/sponsors/badge.svg
 
@@ -158,16 +168,24 @@ repository, organisation, or community you agree to abide by its terms.
 
 [collective]: https://opencollective.com/unified
 
+[chat-badge]: https://img.shields.io/badge/join%20the%20community-on%20spectrum-7b16ff.svg
+
+[chat]: https://spectrum.chat/unified/remark
+
+[npm]: https://docs.npmjs.com/cli/install
+
+[health]: https://github.com/remarkjs/.github
+
+[contributing]: https://github.com/remarkjs/.github/blob/master/contributing.md
+
+[support]: https://github.com/remarkjs/.github/blob/master/support.md
+
+[coc]: https://github.com/remarkjs/.github/blob/master/code-of-conduct.md
+
 [license]: license
 
 [author]: https://wooorm.com
 
-[npm]: https://docs.npmjs.com/cli/install
-
 [remark]: https://github.com/remarkjs/remark
-
-[contributing]: https://github.com/remarkjs/remark/blob/master/contributing.md
-
-[coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md
 
 [man-section]: https://en.wikipedia.org/wiki/Man_page#Manual_sections
