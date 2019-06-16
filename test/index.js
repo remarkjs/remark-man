@@ -29,11 +29,11 @@ function process(file, config) {
     .toString()
 }
 
-/* Hack so the tests don’t need updating everytime... */
+// Hack so the tests don’t need updating everytime…
 var ODate = global.Date
 
 global.Date = function(val) {
-  /* Timestamp: of https://github.com/remarkjs/remark-man/commit/53d7fd7 */
+  // Timestamp of <https://github.com/remarkjs/remark-man/commit/53d7fd7>.
   return new ODate(val || 1454861068000)
 }
 
