@@ -33,7 +33,7 @@ Say we have the following file, `example.md`:
 
 ## SYNOPSIS
 
-`ls` [`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`] \[_file_ _..._]
+`ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`] \[*file* *...*]
 ```
 
 And our script, `example.js`, looks as follows:
@@ -57,15 +57,15 @@ unified()
 Now, running `node example` and `cat example.1` yields:
 
 ```roff
-.TH "LS" "1" "June 2015" "" ""
+.TH "LS" "1" "June 2019" "" ""
 .SH "NAME"
 \fBls\fR - list directory contents
 .SH "SYNOPSIS"
 .P
-\fBls\fR \fB\fB-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1\fR\fR \[lB]\fIfile\fR \fI...\fR\[rB]
+\fBls\fR \[lB]\fB-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1\fR\[rB] \[lB]\fIfile\fR \fI...\fR\[rB]
 ```
 
-Now, that looks horrible, but that’s how roff/groff/troff are.  😉
+Now, that in my opinion isn’t very readable, but that’s roff/groff/troff.  😉
 
 To properly view that man page, use something like this: `man ./example.1`.
 
