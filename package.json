@@ -1,6 +1,6 @@
 {
   "name": "remark-man",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "remark plugin to compile Markdown to man pages (roff)",
   "license": "MIT",
   "keywords": [
