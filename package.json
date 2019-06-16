@@ -1,15 +1,18 @@
 {
   "name": "remark-man",
   "version": "5.1.1",
-  "description": "Compile Markdown to man pages (roff) with remark",
+  "description": "remark plugin to compile Markdown to man pages (roff)",
   "license": "MIT",
   "keywords": [
+    "unified",
+    "remark",
+    "plugin",
+    "mdast",
     "markdown",
     "man",
     "manual",
     "roff",
-    "ronn",
-    "remark"
+    "ronn"
   ],
   "repository": "remarkjs/remark-man",
   "bugs": "https://github.com/remarkjs/remark-man/issues",
