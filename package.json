@@ -52,12 +52,12 @@
     "xo": "^0.24.0"
   },
   "scripts": {
-    "format": "remark *..md -qfo && prettier --write \"**/*.js\" && xo --fix",
+    "format": "remark *.md -qfo && prettier --write \"**/*.js\" && xo --fix",
     "build-bundle": "browserify . -s remarkMan > remark-man.js",
     "build-mangle": "browserify . -s remarkMan -p tinyify > remark-man.min.js",
     "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
-    "test-coverage": "nyc --reporter lcov tape test.js",
+    "test-coverage": "nyc --reporter lcov tape test/index.js",
     "test": "npm run format && npm run build && npm run test-coverage"
   },
   "nyc": {
