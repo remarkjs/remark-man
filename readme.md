@@ -119,6 +119,12 @@ Parsing mode (`boolean`, default: `false`).
 The default behaviour is to prefer the last duplicate definition.
 Set to `true` to prefer the first when duplicate definitions are found.
 
+## Security
+
+Use of `remark-man` does not involve [**rehype**][rehype] ([**hast**][hast]) or
+user content so there are no openings for [cross-site scripting (XSS)][xss]
+attacks.
+
 ## Related
 
 *   [`remark-react`](https://github.com/remarkjs/remark-react)
@@ -189,3 +195,9 @@ abide by its terms.
 [remark]: https://github.com/remarkjs/remark
 
 [man-section]: https://en.wikipedia.org/wiki/Man_page#Manual_sections
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[rehype]: https://github.com/rehypejs/rehype
+
+[hast]: https://github.com/syntax-tree/hast
