@@ -28,7 +28,7 @@ To find documentation for the command line interface, see `man 1 mdast`.
 ### mdast.use(plugin, options?)
 
 Change the way **mdast** functions by using a plugin.  Plugins are documented
-at <https://github.com/wooorm/mdast/blob/master/doc/plugins.md>.
+at <https://github.com/wooorm/mdast/blob/HEAD/doc/plugins.md>.
 
 **Signatures**
 
@@ -64,7 +64,7 @@ Parse a markdown document into an abstract syntax tree.
 **Returns**
 
 `Object` -- Node.  Nodes are documented at
-<https://github.com/wooorm/mdast/blob/master/doc/nodes.md>.
+<https://github.com/wooorm/mdast/blob/HEAD/doc/nodes.md>.
 
 ### mdast.run(ast, file, done?)
 

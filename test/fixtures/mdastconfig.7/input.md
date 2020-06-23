@@ -21,7 +21,7 @@
     per-file configuration to be set through YAML front-matter.
 
 For a list of available configuration options, see the SETTINGS section
-below or <https://github.com/wooorm/mdast/blob/master/doc/options.md>.
+below or <https://github.com/wooorm/mdast/blob/HEAD/doc/options.md>.
 
 ### SETTINGS FOR `PROCESS`, `PARSE()`, AND `STRINGIFY()`
 
@@ -61,7 +61,7 @@ files.  See **mdastrc**(5) for more information.
 
 ### PARSE
 
-See <https://github.com/wooorm/mdast/blob/master/doc/options.md#parse>
+See <https://github.com/wooorm/mdast/blob/HEAD/doc/options.md#parse>
 for a description of these settings.
 
 *   `position` (boolean, default: true);
@@ -74,7 +74,7 @@ for a description of these settings.
 
 ### STRINGIFY
 
-See <https://github.com/wooorm/mdast/blob/master/doc/options.md#stringify>
+See <https://github.com/wooorm/mdast/blob/HEAD/doc/options.md#stringify>
 for a description of these settings.
 
 *   `entities` (`false`, `true`, or `"numbers"`, default: `false`);
