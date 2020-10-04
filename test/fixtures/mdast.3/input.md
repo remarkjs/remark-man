@@ -334,4 +334,4 @@ directory (slashed), if applicable, and suffixed with the (dotted) extension
 
 ## AUTHOR
 
-Written by Titus Wormer <mailto:tituswormer@gmail.com>
+Written by Titus Wormer <tituswormer@gmail.com>

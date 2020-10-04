@@ -142,4 +142,4 @@ When stringifying `readme.md`, **mdast**(1) would use `bullet: "-"`, because
 
 ## AUTHOR
 
-Written by Titus Wormer <mailto:tituswormer@gmail.com>
+Written by Titus Wormer <tituswormer@gmail.com>

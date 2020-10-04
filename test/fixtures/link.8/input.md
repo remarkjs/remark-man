@@ -22,6 +22,8 @@ This is an ![image reference][2].
 
 This is an [invalid reference][3].
 
+An empty link: [](). Or [like so]().
+
 [1]: http://example.com
 
 [2]: http://example.com/favicon.ico

@@ -61,4 +61,4 @@ A `--` argument tells the cli parser to stop reading flags.
 
 ## AUTHOR
 
-Written by Titus Wormer <mailto:tituswormer@gmail.com>
+Written by Titus Wormer <tituswormer@gmail.com>
