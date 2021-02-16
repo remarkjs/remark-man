@@ -56,7 +56,7 @@
     "tinyify": "^3.0.0",
     "unified": "^9.0.0",
     "vfile": "^4.0.0",
-    "xo": "^0.33.0"
+    "xo": "^0.37.0"
   },
   "scripts": {
     "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
@@ -85,7 +85,7 @@
     "prettier": true,
     "esnext": false,
     "rules": {
-      "unicorn/no-fn-reference-in-iterator": "off",
+      "unicorn/prefer-default-parameters": "off",
       "unicorn/prefer-optional-catch-binding": "off",
       "complexity": "off",
       "guard-for-in": "off"
