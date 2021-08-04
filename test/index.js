@@ -1,14 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import test from 'tape'
-import unified from 'unified'
-import parse from 'remark-parse'
-import stringify from 'remark-stringify'
-import gfm from 'remark-gfm'
-import frontmatter from 'remark-frontmatter'
-import footnotes from 'remark-footnotes'
-import vfile from 'vfile'
-import hidden from 'is-hidden'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkStringify from 'remark-stringify'
+import remarkGfm from 'remark-gfm'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkFootnotes from 'remark-footnotes'
+import {VFile} from 'vfile'
+import {isHidden} from 'is-hidden'
 import not from 'negate'
 import man from '../index.js'
 
@@ -17,15 +17,15 @@ var join = path.join
 
 var root = join('test', 'fixtures')
 
-var fixtures = fs.readdirSync(root).filter(not(hidden))
+var fixtures = fs.readdirSync(root).filter(not(isHidden))
 
 function process(file, config) {
   return unified()
-    .use(parse)
-    .use(stringify)
-    .use(gfm)
-    .use(footnotes, {inlineNotes: true})
-    .use(frontmatter)
+    .use(remarkParse)
+    .use(remarkStringify)
+    .use(remarkGfm)
+    .use(remarkFootnotes, {inlineNotes: true})
+    .use(remarkFrontmatter)
     .use(man, config)
     .processSync(file)
     .toString()
@@ -51,7 +51,7 @@ test('remarkMan()', function (t) {
   }, 'should not throw if not passed options')
 
   t.equal(
-    process(vfile({contents: read(join(root, 'nothing', 'input.md'))})),
+    process(new VFile({value: read(join(root, 'nothing', 'input.md'))})),
     read(join(root, 'nothing', 'output.roff'), 'utf8'),
     'should work without filename'
   )
@@ -66,7 +66,7 @@ test('Fixtures', function (t) {
     var filepath = join(root, fixture)
     var output = read(join(filepath, 'output.roff'), 'utf8')
     var input = read(join(filepath, 'input.md'))
-    var file = vfile({path: fixture + '.md', contents: input})
+    var file = new VFile({path: fixture + '.md', value: input})
     var config
 
     try {
