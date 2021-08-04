@@ -40,7 +40,6 @@
     "zwitch": "^1.0.0"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
     "is-hidden": "^1.0.0",
     "negate": "^1.0.0",
     "nyc": "^15.0.0",
@@ -53,19 +52,15 @@
     "remark-preset-wooorm": "^8.0.0",
     "remark-stringify": "^9.0.0",
     "tape": "^5.0.0",
-    "tinyify": "^3.0.0",
     "unified": "^9.0.0",
     "vfile": "^4.0.0",
     "xo": "^0.37.0"
   },
   "scripts": {
     "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
-    "build-bundle": "browserify . -s remarkMan > remark-man.js",
-    "build-mangle": "browserify . -s remarkMan -p tinyify > remark-man.min.js",
-    "build": "npm run build-bundle && npm run build-mangle",
     "test-api": "node test",
     "test-coverage": "nyc --reporter lcov tape test/index.js",
-    "test": "npm run format && npm run build && npm run test-coverage"
+    "test": "npm run format && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,
@@ -89,10 +84,7 @@
       "unicorn/prefer-optional-catch-binding": "off",
       "complexity": "off",
       "guard-for-in": "off"
-    },
-    "ignores": [
-      "remark-man.js"
-    ]
+    }
   },
   "remarkConfig": {
     "plugins": [
