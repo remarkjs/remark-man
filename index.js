@@ -1,9 +1,5 @@
-'use strict'
+import {createCompiler} from './lib/compiler.js'
 
-var compiler = require('./lib/compiler.js')
-
-module.exports = man
-
-function man(options) {
-  this.Compiler = compiler(options || {})
+export default function remarkMan(options) {
+  this.Compiler = createCompiler(options || {})
 }

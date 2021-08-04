@@ -1,23 +1,21 @@
-'use strict'
-
-var fs = require('fs')
-var path = require('path')
-var test = require('tape')
-var unified = require('unified')
-var parse = require('remark-parse')
-var stringify = require('remark-stringify')
-var gfm = require('remark-gfm')
-var frontmatter = require('remark-frontmatter')
-var footnotes = require('remark-footnotes')
-var vfile = require('vfile')
-var hidden = require('is-hidden')
-var not = require('negate')
-var man = require('..')
+import fs from 'fs'
+import path from 'path'
+import test from 'tape'
+import unified from 'unified'
+import parse from 'remark-parse'
+import stringify from 'remark-stringify'
+import gfm from 'remark-gfm'
+import frontmatter from 'remark-frontmatter'
+import footnotes from 'remark-footnotes'
+import vfile from 'vfile'
+import hidden from 'is-hidden'
+import not from 'negate'
+import man from '../index.js'
 
 var read = fs.readFileSync
 var join = path.join
 
-var root = join(__dirname, 'fixtures')
+var root = join('test', 'fixtures')
 
 var fixtures = fs.readdirSync(root).filter(not(hidden))
 
@@ -62,7 +60,9 @@ test('remarkMan()', function (t) {
 })
 
 test('Fixtures', function (t) {
-  fixtures.forEach(function (fixture) {
+  let index = -1
+  while (++index < fixtures.length) {
+    const fixture = fixtures[index]
     var filepath = join(root, fixture)
     var output = read(join(filepath, 'output.roff'), 'utf8')
     var input = read(join(filepath, 'input.md'))
@@ -76,7 +76,7 @@ test('Fixtures', function (t) {
     }
 
     t.equal(process(file, config), output, fixture)
-  })
+  }
 
   t.end()
 })

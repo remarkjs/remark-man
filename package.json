@@ -25,13 +25,16 @@
   "contributors": [
     "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)"
   ],
+  "sideEffects": false,
+  "type": "module",
+  "main": "index.js",
   "files": [
-    "lib",
+    "lib/",
     "index.js"
   ],
   "dependencies": {
     "github-slugger": "^1.0.0",
-    "groff-escape": "^1.0.0",
+    "groff-escape": "^2.0.0",
     "mapz": "^1.0.0",
     "mdast-util-definitions": "^4.0.0",
     "mdast-util-to-string": "^1.0.0",
@@ -54,7 +57,7 @@
     "tape": "^5.0.0",
     "unified": "^9.0.0",
     "vfile": "^4.0.0",
-    "xo": "^0.37.0"
+    "xo": "^0.39.0"
   },
   "scripts": {
     "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
@@ -72,8 +75,9 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false,
     "rules": {
+      "no-var": "off",
+      "prefer-arrow-callback": "off",
       "unicorn/prefer-default-parameters": "off",
       "unicorn/prefer-optional-catch-binding": "off",
       "complexity": "off",
