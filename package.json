@@ -74,15 +74,7 @@
     "trailingComma": "none"
   },
   "xo": {
-    "prettier": true,
-    "rules": {
-      "no-var": "off",
-      "prefer-arrow-callback": "off",
-      "unicorn/prefer-default-parameters": "off",
-      "unicorn/prefer-optional-catch-binding": "off",
-      "complexity": "off",
-      "guard-for-in": "off"
-    }
+    "prettier": true
   },
   "remarkConfig": {
     "plugins": [

@@ -12,12 +12,12 @@ import {isHidden} from 'is-hidden'
 import not from 'negate'
 import man from '../index.js'
 
-var read = fs.readFileSync
-var join = path.join
+const read = fs.readFileSync
+const join = path.join
 
-var root = join('test', 'fixtures')
+const root = join('test', 'fixtures')
 
-var fixtures = fs.readdirSync(root).filter(not(isHidden))
+const fixtures = fs.readdirSync(root).filter(not(isHidden))
 
 function process(file, config) {
   return unified()
@@ -32,21 +32,21 @@ function process(file, config) {
 }
 
 // Hack so the tests don’t need updating everytime…
-var ODate = global.Date
+const ODate = global.Date
 
 global.Date = function (value) {
   // Timestamp of <https://github.com/remarkjs/remark-man/commit/53d7fd7>.
   return new ODate(value || 1454861068000)
 }
 
-test.onFinish(function () {
+test.onFinish(() => {
   global.Date = ODate
 })
 
-test('remarkMan()', function (t) {
+test('remarkMan()', (t) => {
   t.equal(typeof man, 'function', 'should be a function')
 
-  t.doesNotThrow(function () {
+  t.doesNotThrow(() => {
     man.call(unified().use(man).freeze())
   }, 'should not throw if not passed options')
 
@@ -59,21 +59,20 @@ test('remarkMan()', function (t) {
   t.end()
 })
 
-test('Fixtures', function (t) {
+test('Fixtures', (t) => {
   let index = -1
+
   while (++index < fixtures.length) {
     const fixture = fixtures[index]
-    var filepath = join(root, fixture)
-    var output = read(join(filepath, 'output.roff'), 'utf8')
-    var input = read(join(filepath, 'input.md'))
-    var file = new VFile({path: fixture + '.md', value: input})
-    var config
+    const filepath = join(root, fixture)
+    const output = read(join(filepath, 'output.roff'), 'utf8')
+    const input = read(join(filepath, 'input.md'))
+    const file = new VFile({path: fixture + '.md', value: input})
+    let config = {}
 
     try {
       config = JSON.parse(read(join(filepath, 'config.json'), 'utf8'))
-    } catch (_) {
-      config = {}
-    }
+    } catch {}
 
     t.equal(process(file, config), output, fixture)
   }
