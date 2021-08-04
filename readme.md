@@ -25,6 +25,9 @@ No change is needed: it works exactly the same now as it did before!
 
 ## Install
 
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
+Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
+
 [npm][]:
 
 ```sh
@@ -46,18 +49,16 @@ Say we have the following file, `example.md`:
 And our script, `example.js`, looks as follows:
 
 ```js
-var vfile = require('to-vfile')
-var unified = require('unified')
-var markdown = require('remark-parse')
-var man = require('remark-man')
+import {read, write} from 'to-vfile'
+import {unified} from 'unified'
+import remarkParse from 'remark-parse'
+import remarkMan from 'remark-man'
 
-unified()
-  .use(markdown)
-  .use(man)
-  .process(vfile.readSync('example.md'), function(err, file) {
-    if (err) throw err
+read('example.md')
+  .then((file) => unified().use(remarkParse).use(remarkMan).process(file))
+  .then((file) => {
     file.extname = '.1'
-    vfile.writeSync(file)
+    return write(file)
   })
 ```
 
@@ -76,7 +77,12 @@ Now, that in my opinion isn’t very readable, but that’s roff/groff/troff.  �
 
 To properly view that man page, use something like this: `man ./example.1`.
 
-### `remark().use(man[, options])`
+## API
+
+This package exports no identifiers.
+The default export is `remarkMan`.
+
+### `unified().use(remarkMan[, options])`
 
 Plugin to compile Markdown to man pages.
 
