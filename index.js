@@ -30,10 +30,6 @@
  * @property {string} [manual]
  *   Manual of page.
  *   Manuals are centered in the header line of the displayed page.
- * @property {boolean} [commonmark=false]
- *   Parsing mode.
- *   The default behavior is to prefer the last duplicate definition.
- *   Set to `true` to prefer the first when duplicate definitions are found.
  */
 
 import {createCompiler} from './lib/create-compiler.js'

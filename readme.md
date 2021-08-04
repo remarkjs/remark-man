@@ -126,12 +126,6 @@ printing is active).
 Manual of page (`string`, optional).
 Manuals are centered in the header line of the displayed page.
 
-###### `options.commonmark`
-
-Parsing mode (`boolean`, default: `false`).
-The default behavior is to prefer the last duplicate definition.
-Set to `true` to prefer the first when duplicate definitions are found.
-
 ## Security
 
 Use of `remark-man` does not involve [**rehype**][rehype] ([**hast**][hast]) or
