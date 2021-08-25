@@ -2,8 +2,8 @@
  * @typedef {import('../index.js').Options} Options
  */
 
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import test from 'tape'
 import {unified} from 'unified'
 import remarkParse from 'remark-parse'
@@ -45,7 +45,7 @@ const ODate = global.Date
 // @ts-expect-error: hush.
 global.Date = function (/** @type {string|number|Date} */ value) {
   // Timestamp of <https://github.com/remarkjs/remark-man/commit/53d7fd7>.
-  return new ODate(value || 1454861068000)
+  return new ODate(value || 1_454_861_068_000)
 }
 
 test.onFinish(() => {
