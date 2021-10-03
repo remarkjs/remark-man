@@ -10,7 +10,6 @@ import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 import remarkGfm from 'remark-gfm'
 import remarkFrontmatter from 'remark-frontmatter'
-import remarkFootnotes from 'remark-footnotes'
 import {VFile} from 'vfile'
 import {isHidden} from 'is-hidden'
 import man from '../index.js'
@@ -32,7 +31,6 @@ function process(file, config) {
     .use(remarkParse)
     .use(remarkStringify)
     .use(remarkGfm)
-    .use(remarkFootnotes, {inlineNotes: true})
     .use(remarkFrontmatter)
     .use(man, config)
     .processSync(file)

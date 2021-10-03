@@ -54,9 +54,8 @@
     "negate": "^1.0.0",
     "prettier": "^2.0.0",
     "remark-cli": "^10.0.0",
-    "remark-footnotes": "^4.0.0",
     "remark-frontmatter": "^4.0.0",
-    "remark-gfm": "^2.0.0",
+    "remark-gfm": "^3.0.0",
     "remark-parse": "^10.0.0",
     "remark-preset-wooorm": "^9.0.0",
     "remark-stringify": "^10.0.0",
@@ -65,7 +64,7 @@
     "type-coverage": "^2.0.0",
     "typescript": "^4.0.0",
     "vfile": "^5.0.0",
-    "xo": "^0.44.0"
+    "xo": "^0.45.0"
   },
   "scripts": {
     "build": "rimraf \"lib/**/*.d.ts\" \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
