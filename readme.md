@@ -8,35 +8,70 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**remark**][remark] plugin to compile Markdown to man pages.
+**[remark][]** plugin to compile markdown to man pages.
 
-*   [x] Great unicode support
-*   [x] Name, section, and description detection
-*   [x] Nested block quotes and lists
-*   [x] Tables
-*   [x] and much more
+## Contents
 
-## Note!
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`unified().use(remarkMan[, options])`](#unifieduseremarkman-options)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Related](#related)
+*   [Contribute](#contribute)
+*   [License](#license)
 
-This plugin is ready for the new parser in remark
-([`micromark`](https://github.com/micromark/micromark),
-see [`remarkjs/remark#536`](https://github.com/remarkjs/remark/pull/536)).
-No change is needed: it works exactly the same now as it did before!
+## What is this?
+
+This package is a [unified][] ([remark][]) plugin that compiles markdown to
+roff/groff/troff (the format used for man pages).
+
+**unified** is a project that transforms content with abstract syntax trees
+(ASTs).
+**remark** adds support for markdown to unified.
+**mdast** is the markdown AST that remark uses.
+This is a remark plugin that adds a compiler to compile mdast to a string.
+
+## When should I use this?
+
+This plugin adds a compiler for remark, which means that it turns the final
+markdown (mdast) syntax tree into a string.
+
+This plugin, combined with remark, is quite good at turning markdown into man
+pages.
+It has good unicode support, proper support for nested lists and block quotes,
+supports tables, and more.
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install remark-man
 ```
 
+In Deno with [Skypack][]:
+
+```js
+import remarkMan from 'https://cdn.skypack.dev/remark-man@8?dts'
+```
+
+In browsers with [Skypack][]:
+
+```html
+<script type="module">
+  import remarkMan from 'https://cdn.skypack.dev/remark-man@8?min'
+</script>
+```
+
 ## Use
 
-Say we have the following file, `example.md`:
+Say we have some markdown in `example.md`:
 
 ```markdown
 # ls(1) -- list directory contents
@@ -46,7 +81,7 @@ Say we have the following file, `example.md`:
 `ls` \[`-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1`] \[*file* *...*]
 ```
 
-And our script, `example.js`, looks as follows:
+And our module `example.js` looks as follows:
 
 ```js
 import {read, write} from 'to-vfile'
@@ -54,18 +89,23 @@ import {unified} from 'unified'
 import remarkParse from 'remark-parse'
 import remarkMan from 'remark-man'
 
-read('example.md')
-  .then((file) => unified().use(remarkParse).use(remarkMan).process(file))
-  .then((file) => {
-    file.extname = '.1'
-    return write(file)
-  })
+main()
+
+async function main() {
+  const file = await unified()
+    .use(remarkParse)
+    .use(remarkMan)
+    .process(await read('example.md'))
+
+  file.extname = '.1'
+  await write(file)
+}
 ```
 
-Now, running `node example` and `cat example.1` yields:
+Now running `node example.js` creates a file `example.1` that contains:
 
 ```roff
-.TH "LS" "1" "June 2019" "" ""
+.TH "LS" "1" "November 2021" "" ""
 .SH "NAME"
 \fBls\fR - list directory contents
 .SH "SYNOPSIS"
@@ -73,9 +113,8 @@ Now, running `node example` and `cat example.1` yields:
 \fBls\fR \[lB]\fB-ABCFGHLOPRSTUW@abcdefghiklmnopqrstuwx1\fR\[rB] \[lB]\fIfile\fR \fI...\fR\[rB]
 ```
 
-Now, that in my opinion isn’t very readable, but that’s roff/groff/troff.  😉
-
-To properly view that man page, use something like this: `man ./example.1`.
+That’s not very readable but a man page viewer can solve that.
+Run `man ./example.1` to view the rendered result.
 
 ## API
 
@@ -88,6 +127,8 @@ Plugin to compile Markdown to man pages.
 
 ##### `options`
 
+Configuration (optional).
+
 ###### `options.name`
 
 Title of the page (`string`, optional).
@@ -97,7 +138,7 @@ Is inferred from the main heading (`# hello-world(7)` sets `name` to
 
 ###### `options.section`
 
-[Section][man-section] of page (`number` or `string`, optional).
+[Man section][man-section] of page (`number` or `string`, optional).
 Is inferred from the main heading (`# hello-world(7)` sets `section` to `7`) or
 from the file’s name (`hello-world.1.md` sets `section` to `1`).
 
@@ -126,22 +167,34 @@ printing is active).
 Manual of page (`string`, optional).
 Manuals are centered in the header line of the displayed page.
 
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports an `Options` type, which specifies the interface of the accepted
+options.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
+
+This plugin works with `unified` version 6+ and `remark` version 7+.
+
 ## Security
 
-Use of `remark-man` does not involve [**rehype**][rehype] ([**hast**][hast]) or
-user content so there are no openings for [cross-site scripting (XSS)][xss]
-attacks.
+Use of `remark-man` does not involve **[rehype][]** (**[hast][]**) or user
+content so there are no openings for [cross-site scripting (XSS)][xss] attacks.
 
 ## Related
 
-*   [`remark-react`](https://github.com/remarkjs/remark-react)
-    — Compile to React
-*   [`remark-vdom`](https://github.com/remarkjs/remark-vdom)
-    — Compile to VDOM
-*   [`remark-html`](https://github.com/remarkjs/remark-html)
-    — Compile to HTML
 *   [`remark-rehype`](https://github.com/remarkjs/remark-rehype)
-    — Properly transform to HTML
+    — turn markdown into HTML to support rehype
+*   [`remark-stringify`](https://github.com/remarkjs/remark/tree/main/packages/remark-stringify)
+    — compile markdown
+*   [`remark-vdom`](https://github.com/remarkjs/remark-vdom)
+    — compile markdown to VDOM
 
 ## Contribute
 
@@ -187,6 +240,8 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[skypack]: https://www.skypack.dev
+
 [health]: https://github.com/remarkjs/.github
 
 [contributing]: https://github.com/remarkjs/.github/blob/HEAD/contributing.md
@@ -201,9 +256,13 @@ abide by its terms.
 
 [remark]: https://github.com/remarkjs/remark
 
+[unified]: https://github.com/unifiedjs/unified
+
 [man-section]: https://en.wikipedia.org/wiki/Man_page#Manual_sections
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[typescript]: https://www.typescriptlang.org
 
 [rehype]: https://github.com/rehypejs/rehype
 

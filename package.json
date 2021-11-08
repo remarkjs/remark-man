@@ -1,7 +1,7 @@
 {
   "name": "remark-man",
   "version": "8.0.0",
-  "description": "remark plugin to compile Markdown to man pages (roff)",
+  "description": "remark plugin to compile markdown to man pages",
   "license": "MIT",
   "keywords": [
     "unified",
