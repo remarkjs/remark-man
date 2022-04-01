@@ -55,17 +55,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install remark-man
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import remarkMan from 'https://cdn.skypack.dev/remark-man@8?dts'
+import remarkMan from 'https://esm.sh/remark-man@8'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import remarkMan from 'https://cdn.skypack.dev/remark-man@8?min'
+  import remarkMan from 'https://esm.sh/remark-man@8?bundle'
 </script>
 ```
 
@@ -240,7 +240,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [health]: https://github.com/remarkjs/.github
 
