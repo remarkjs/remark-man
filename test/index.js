@@ -54,7 +54,7 @@ test('remarkMan()', (t) => {
   t.equal(typeof man, 'function', 'should be a function')
 
   t.doesNotThrow(() => {
-    man.call(unified().use(man).freeze())
+    unified().use(man).freeze()
   }, 'should not throw if not passed options')
 
   t.equal(

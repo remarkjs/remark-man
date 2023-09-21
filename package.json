@@ -48,12 +48,12 @@
   },
   "devDependencies": {
     "@types/github-slugger": "^1.0.0",
-    "@types/tape": "^4.0.0",
-    "c8": "^7.0.0",
+    "@types/tape": "^5.0.0",
+    "c8": "^8.0.0",
     "is-hidden": "^2.0.0",
     "negate": "^1.0.0",
-    "prettier": "^2.0.0",
-    "remark-cli": "^10.0.0",
+    "prettier": "^3.0.0",
+    "remark-cli": "^11.0.0",
     "remark-frontmatter": "^4.0.0",
     "remark-gfm": "^3.0.0",
     "remark-parse": "^10.0.0",
@@ -62,13 +62,13 @@
     "rimraf": "^3.0.0",
     "tape": "^5.0.0",
     "type-coverage": "^2.0.0",
-    "typescript": "^4.0.0",
+    "typescript": "^5.0.0",
     "vfile": "^5.0.0",
-    "xo": "^0.46.0"
+    "xo": "^0.56.0"
   },
   "scripts": {
     "build": "rimraf \"lib/**/*.d.ts\" \"test/**/*.d.ts\" \"*.d.ts\" && tsc && type-coverage",
-    "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --loglevel warn && xo --fix",
+    "format": "remark . -qfo --ignore-pattern test/ && prettier . -w --log-level warn && xo --fix",
     "test-api": "node --conditions development test/index.js",
     "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
     "test": "npm run build && npm run format && npm run test-coverage"
@@ -82,7 +82,11 @@
     "trailingComma": "none"
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "rules": {
+      "unicorn/prefer-at": "off",
+      "unicorn/prefer-string-replace-all": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [
@@ -93,6 +97,10 @@
     "atLeast": 100,
     "detail": true,
     "strict": true,
-    "ignoreCatch": true
+    "ignoreCatch": true,
+    "#": "needed `any`s",
+    "ignoreFiles": [
+      "lib/create-compiler.d.ts"
+    ]
   }
 }
