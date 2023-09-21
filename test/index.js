@@ -54,6 +54,18 @@ test('remarkMan', async function (t) {
       )
     )
   })
+
+  await t.test('should throw on unknown nodes', async function () {
+    try {
+      await unified().use(remarkMan).stringify(
+        // @ts-expect-error: unknown node.
+        {type: 'toml', value: 'x'}
+      )
+      assert.fail()
+    } catch (error) {
+      assert.match(String(error), /Cannot compile `toml` node/)
+    }
+  })
 })
 
 test('fixtures', async function (t) {
