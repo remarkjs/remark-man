@@ -2,43 +2,16 @@
  * @typedef {import('../index.js').Options} Options
  */
 
-import fs from 'node:fs'
-import path from 'node:path'
-import test from 'tape'
+import assert from 'node:assert/strict'
+import fs from 'node:fs/promises'
+import process from 'node:process'
+import test from 'node:test'
 import {unified} from 'unified'
 import remarkParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
 import remarkGfm from 'remark-gfm'
 import remarkFrontmatter from 'remark-frontmatter'
 import {VFile} from 'vfile'
-import {isHidden} from 'is-hidden'
-import man from '../index.js'
-
-const read = fs.readFileSync
-const join = path.join
-
-const root = join('test', 'fixtures')
-
-const fixtures = fs.readdirSync(root).filter((d) => !isHidden(d))
-
-/**
- * @param {VFile} file
- * @param {Options} [config]
- * @returns {string}
- */
-function process(file, config) {
-  return (
-    unified()
-      .use(remarkParse)
-      .use(remarkStringify)
-      .use(remarkGfm)
-      .use(remarkFrontmatter)
-      // @ts-expect-error: remove when fixed.
-      .use(man, config)
-      .processSync(file)
-      .toString()
-  )
-}
+import remarkMan from '../index.js'
 
 // Hack so the tests don’t need updating everytime…
 const ODate = global.Date
@@ -49,43 +22,85 @@ global.Date = function (/** @type {string|number|Date} */ value) {
   return new ODate(value || 1_454_861_068_000)
 }
 
-test.onFinish(() => {
+process.on('exit', function () {
   global.Date = ODate
 })
 
-test('remarkMan()', (t) => {
-  t.equal(typeof man, 'function', 'should be a function')
-
-  t.doesNotThrow(() => {
-    unified().use(man).freeze()
-  }, 'should not throw if not passed options')
-
-  t.equal(
-    process(new VFile({value: read(join(root, 'nothing', 'input.md'))})),
-    read(join(root, 'nothing', 'output.roff'), 'utf8'),
-    'should work without filename'
-  )
-
-  t.end()
+test('remarkMan', async function (t) {
+  await t.test('should work without filename', async function () {
+    assert.equal(
+      String(
+        await unified()
+          .use(remarkParse)
+          .use(remarkFrontmatter)
+          .use(remarkGfm)
+          .use(remarkMan)
+          .process(
+            await fs.readFile(
+              new URL('fixtures/nothing/input.md', import.meta.url)
+            )
+          )
+      ),
+      String(
+        await fs.readFile(
+          new URL('fixtures/nothing/output.roff', import.meta.url)
+        )
+      )
+    )
+  })
 })
 
-test('Fixtures', (t) => {
+test('fixtures', async function (t) {
+  const base = new URL('fixtures/', import.meta.url)
+  const folders = await fs.readdir(base)
+
   let index = -1
 
-  while (++index < fixtures.length) {
-    const fixture = fixtures[index]
-    const filepath = join(root, fixture)
-    const output = read(join(filepath, 'output.roff'), 'utf8')
-    const input = read(join(filepath, 'input.md'))
-    const file = new VFile({path: fixture + '.md', value: input})
-    let config = {}
+  while (++index < folders.length) {
+    const folder = folders[index]
 
-    try {
-      config = JSON.parse(read(join(filepath, 'config.json'), 'utf8'))
-    } catch {}
+    if (folder.startsWith('.')) continue
 
-    t.equal(process(file, config), output, fixture)
+    await t.test(folder, async function () {
+      const folderUrl = new URL(folder + '/', base)
+      const inputUrl = new URL('input.md', folderUrl)
+      const outputUrl = new URL('output.roff', folderUrl)
+      const configUrl = new URL('config.json', folderUrl)
+
+      const input = String(await fs.readFile(inputUrl))
+      const file = new VFile({path: folder + '.md', value: input})
+
+      /** @type {Options | undefined} */
+      let config
+      /** @type {string} */
+      let output
+
+      try {
+        config = JSON.parse(String(await fs.readFile(configUrl)))
+      } catch {}
+
+      const actual = String(
+        await unified()
+          .use(remarkParse)
+          .use(remarkFrontmatter)
+          .use(remarkGfm)
+          // @ts-expect-error: to do: fix.
+          .use(remarkMan, config)
+          .process(file)
+      )
+
+      try {
+        if ('UPDATE' in process.env) {
+          throw new Error('Updating…')
+        }
+
+        output = String(await fs.readFile(outputUrl))
+      } catch {
+        output = actual
+        await fs.writeFile(outputUrl, actual)
+      }
+
+      assert.equal(actual, output)
+    })
   }
-
-  t.end()
 })
