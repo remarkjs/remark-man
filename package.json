@@ -87,12 +87,20 @@
     "ignoreCatch": true,
     "#": "needed `any`s",
     "ignoreFiles": [
-      "lib/create-compiler.d.ts"
+      "lib/to-roff.d.ts"
     ],
     "strict": true
   },
   "xo": {
     "overrides": [
+      {
+        "files": [
+          "**/*.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/ban-types": "off"
+        }
+      },
       {
         "files": [
           "test/**/*.js"

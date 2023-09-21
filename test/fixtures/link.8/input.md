@@ -20,6 +20,8 @@ This is a [link reference][1].
 
 This is an ![image reference][2].
 
+This is an empty image reference ![][2].
+
 This is an [invalid reference][3].
 
 An empty link: [](). Or [like so]().

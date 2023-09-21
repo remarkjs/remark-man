@@ -6,18 +6,18 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs/promises'
 import process from 'node:process'
 import test from 'node:test'
-import {unified} from 'unified'
-import remarkParse from 'remark-parse'
-import remarkGfm from 'remark-gfm'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkGfm from 'remark-gfm'
+import remarkParse from 'remark-parse'
+import {unified} from 'unified'
 import {VFile} from 'vfile'
 import remarkMan from '../index.js'
 
 // Hack so the tests don’t need updating everytime…
 const ODate = global.Date
 
-// @ts-expect-error: hush.
-global.Date = function (/** @type {string|number|Date} */ value) {
+// @ts-expect-error: good enough for our tests.
+global.Date = function (/** @type {string | number | undefined} */ value) {
   // Timestamp of <https://github.com/remarkjs/remark-man/commit/53d7fd7>.
   return new ODate(value || 1_454_861_068_000)
 }
@@ -27,6 +27,12 @@ process.on('exit', function () {
 })
 
 test('remarkMan', async function (t) {
+  await t.test('should expose the public api', async function () {
+    assert.deepEqual(Object.keys(await import('../index.js')).sort(), [
+      'default'
+    ])
+  })
+
   await t.test('should work without filename', async function () {
     assert.equal(
       String(
@@ -70,7 +76,7 @@ test('fixtures', async function (t) {
       const input = String(await fs.readFile(inputUrl))
       const file = new VFile({path: folder + '.md', value: input})
 
-      /** @type {Options | undefined} */
+      /** @type {Readonly<Options> | undefined} */
       let config
       /** @type {string} */
       let output
@@ -84,7 +90,6 @@ test('fixtures', async function (t) {
           .use(remarkParse)
           .use(remarkFrontmatter)
           .use(remarkGfm)
-          // @ts-expect-error: to do: fix.
           .use(remarkMan, config)
           .process(file)
       )
