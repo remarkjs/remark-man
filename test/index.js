@@ -27,14 +27,17 @@ const fixtures = fs.readdirSync(root).filter((d) => !isHidden(d))
  * @returns {string}
  */
 function process(file, config) {
-  return unified()
-    .use(remarkParse)
-    .use(remarkStringify)
-    .use(remarkGfm)
-    .use(remarkFrontmatter)
-    .use(man, config)
-    .processSync(file)
-    .toString()
+  return (
+    unified()
+      .use(remarkParse)
+      .use(remarkStringify)
+      .use(remarkGfm)
+      .use(remarkFrontmatter)
+      // @ts-expect-error: remove when fixed.
+      .use(man, config)
+      .processSync(file)
+      .toString()
+  )
 }
 
 // Hack so the tests don’t need updating everytime…
