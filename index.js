@@ -40,5 +40,9 @@ import {createCompiler} from './lib/create-compiler.js'
  * @type {import('unified').Plugin<[Options?] | void[], Root, string>}
  */
 export default function remarkMan(options = {}) {
-  Object.assign(this, {Compiler: createCompiler(options)})
+  // @ts-expect-error: TypeScript doesn’t handle `this` well.
+  // eslint-disable-next-line unicorn/no-this-assignment
+  const self = /** @type {Processor} */ (this)
+
+  self.compiler = createCompiler(options)
 }
