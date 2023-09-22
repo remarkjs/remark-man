@@ -54,14 +54,14 @@ npm install remark-man
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import remarkMan from 'https://esm.sh/remark-man@8'
+import remarkMan from 'https://esm.sh/remark-man@9'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import remarkMan from 'https://esm.sh/remark-man@8?bundle'
+  import remarkMan from 'https://esm.sh/remark-man@9?bundle'
 </script>
 ```
 
