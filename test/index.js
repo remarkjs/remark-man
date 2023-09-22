@@ -1,5 +1,5 @@
 /**
- * @typedef {import('../index.js').Options} Options
+ * @typedef {import('remark-man').Options} Options
  */
 
 import assert from 'node:assert/strict'
@@ -8,10 +8,10 @@ import process from 'node:process'
 import test from 'node:test'
 import remarkFrontmatter from 'remark-frontmatter'
 import remarkGfm from 'remark-gfm'
+import remarkMan from 'remark-man'
 import remarkParse from 'remark-parse'
 import {unified} from 'unified'
 import {VFile} from 'vfile'
-import remarkMan from '../index.js'
 
 // Hack so the tests don’t need updating everytime…
 const ODate = global.Date
@@ -28,7 +28,7 @@ process.on('exit', function () {
 
 test('remarkMan', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('../index.js')).sort(), [
+    assert.deepEqual(Object.keys(await import('remark-man')).sort(), [
       'default'
     ])
   })
